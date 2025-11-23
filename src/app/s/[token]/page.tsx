@@ -77,7 +77,7 @@ export default function SharePage() {
 
   if (loading) {
     return (
-      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center p-4 safe-area-inset">
+      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center px-2 py-4 safe-area-inset">
         <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center">
           <div className="text-white">Loading...</div>
         </div>
@@ -87,9 +87,9 @@ export default function SharePage() {
 
   if (!shareData) {
     return (
-      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center p-4 safe-area-inset">
+      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center px-2 py-4 safe-area-inset">
         <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center">
-          <div className="text-white text-center px-6">
+          <div className="text-white text-center px-3">
             <p className="mb-4">Share link not found</p>
             <button
               onClick={() => router.push('/')}
@@ -104,17 +104,17 @@ export default function SharePage() {
   }
 
   return (
-    <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center p-4 safe-area-inset">
+    <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center px-2 py-4 safe-area-inset">
       <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative">
         <div className="h-full flex flex-col bg-[#0B0B0D] relative overflow-hidden">
           {/* Background gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-pink-900/5 to-transparent pointer-events-none" />
           
           {/* Header */}
-          <div className="relative px-6 pt-14 pb-4 border-b border-white/5 z-20">
+          <div className="relative px-3 pt-14 pb-3 border-b border-white/5 z-20">
             <button 
               onClick={() => router.push('/')}
-              className="absolute left-6 top-14 text-gray-400 hover:text-white transition-colors"
+              className="absolute left-3 top-14 text-gray-400 hover:text-white transition-colors"
             >
               <ArrowLeft className="w-6 h-6" />
             </button>
@@ -129,34 +129,31 @@ export default function SharePage() {
           </div>
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto px-6 py-6 relative z-10">
+          <div className="flex-1 overflow-y-auto px-3 py-3 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
               {/* Category chip */}
-              <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-400/30 mb-4 shadow-sm shadow-purple-500/20">
+              <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-400/30 mb-2 shadow-sm shadow-purple-500/20">
                 <span className="text-purple-300">{shareData.scenario.category}</span>
               </div>
 
               {/* Title */}
-              <h1 className="text-white mb-6 leading-tight">
+              <h1 className="text-white mb-2 leading-tight text-lg">
                 {shareData.scenario.title}
               </h1>
 
-              {/* Story */}
-              <div className="relative bg-gradient-to-br from-[#1a1a1f] to-[#15151a] rounded-3xl p-6 border border-white/5 mb-6 shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-transparent rounded-3xl pointer-events-none" />
-                <p className="text-[#DAD9E8] leading-[1.75] whitespace-pre-line relative z-10">
-                  {shareData.scenario.fullText}
-                </p>
-              </div>
+              {/* Story - no container, smaller font */}
+              <p className="text-[#DAD9E8] text-sm leading-[1.7] whitespace-pre-line mb-4">
+                {shareData.scenario.fullText}
+              </p>
 
               {/* Existing Answers */}
               {shareData.answers.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-white mb-4">What others think:</h3>
+                <div className="mb-4">
+                  <h3 className="text-white mb-3 text-sm">What others think:</h3>
                   {shareData.answers.map((answer, index) => (
                     <motion.div
                       key={answer.id}
@@ -171,17 +168,18 @@ export default function SharePage() {
                         </div>
                         <span className="text-gray-400 text-sm">{answer.name}</span>
                       </div>
-                      <div className="relative bg-gradient-to-br from-[#1a1a1f] to-[#15151a] rounded-3xl p-5 border border-white/5">
-                        <p className="text-[#DAD9E8] leading-[1.7]">{answer.perspective}</p>
-                      </div>
+                      {/* Answer text - no container */}
+                      <p className="text-[#DAD9E8] text-sm leading-[1.7]">
+                        {answer.perspective}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
               )}
 
               {/* Add Your Answer Section */}
-              <div className="mb-6">
-                <h3 className="text-white mb-4">What's your honest take?</h3>
+              <div className="mb-4">
+                <h3 className="text-white mb-3 text-sm">What's your honest take?</h3>
                 
                 <input
                   type="text"

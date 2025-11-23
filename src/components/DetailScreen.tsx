@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Send, Share2, Heart, Copy, Check } from 'lucide-react';
+import { ArrowLeft, Share2, Heart, Copy, Check } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -23,7 +23,6 @@ interface DetailScreenProps {
 }
 
 export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenProps) {
-  const [answer, setAnswer] = useState('');
   const [isSharing, setIsSharing] = useState(false);
   const [shareUrl, setShareUrl] = useState<string>('');
   const [showShareDialog, setShowShareDialog] = useState(false);
@@ -61,12 +60,6 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
       } catch (error) {
         console.error('Failed to copy:', error);
       }
-    }
-  };
-
-  const handleSubmit = () => {
-    if (answer.trim()) {
-      onAnswerSubmit(answer);
     }
   };
 
@@ -121,9 +114,9 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
             whileTap={{ scale: 0.97 }}
             onClick={handleShare}
             disabled={isSharing}
-            className="relative w-full h-14 rounded-full overflow-hidden mb-4 shadow-lg shadow-purple-500/20 group disabled:opacity-50"
+            className="relative w-full h-14 rounded-full overflow-hidden mb-4 shadow-lg shadow-pink-500/20 group disabled:opacity-50"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-teal-400" />
+            <div className="absolute inset-0 bg-pink-500" />
             
             {/* Heart pulse effect */}
             {isSharing && (
@@ -142,38 +135,6 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
               <span className="tracking-wide">{isSharing ? 'Creating link...' : 'Ask your partner'}</span>
             </div>
           </motion.button>
-
-          {/* Answer Section */}
-          <div className="mb-4">
-            <h3 className="text-white mb-3">
-              What's your honest take?
-            </h3>
-            
-            <div className="relative bg-[#15151a] rounded-3xl border border-white/5 overflow-hidden shadow-inner">
-              <textarea
-                value={answer}
-                onChange={(e) => setAnswer(e.target.value)}
-                placeholder="Write your honest take…"
-                className="w-full bg-transparent text-[#DAD9E8] placeholder-gray-500 p-4 min-h-[120px] resize-none outline-none"
-                style={{ lineHeight: '1.7' }}
-              />
-            </div>
-
-            <motion.button
-              whileTap={{ scale: 0.97 }}
-              onClick={handleSubmit}
-              disabled={!answer.trim()}
-              className={`relative w-full h-12 rounded-full overflow-hidden mt-4 transition-opacity ${
-                !answer.trim() ? 'opacity-40 cursor-not-allowed' : 'shadow-lg shadow-pink-500/20'
-              }`}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-rose-400" />
-              <div className="absolute inset-0 flex items-center justify-center text-white gap-2">
-                <span className="tracking-wide">Send your take</span>
-                <Send className="w-4 h-4" />
-              </div>
-            </motion.button>
-          </div>
         </motion.div>
       </div>
     </div>
@@ -216,7 +177,7 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
 
             {/* Info text */}
             <p className="text-xs text-gray-500 text-center">
-              Send this link to your partner to see their perspective
+              Send this link to your partner to see their perspective. You can write yours too.
             </p>
           </div>
         </DialogContent>
