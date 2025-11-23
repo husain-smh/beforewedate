@@ -1,0 +1,41 @@
+'use client'
+
+import { FeedScreen } from '@/components/FeedScreen'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
+
+export default function FeedPage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [categories, setCategories] = useState<string[]>([])
+
+  useEffect(() => {
+    const categoriesParam = searchParams.get('categories')
+    if (categoriesParam) {
+      setCategories(categoriesParam.split(',').filter(Boolean))
+    }
+  }, [searchParams])
+
+  const handleScenarioClick = (scenario: any) => {
+    const categoriesParam = categories.length > 0 ? `?categories=${categories.join(',')}` : ''
+    router.push(`/scene/${scenario.id}${categoriesParam}`)
+  }
+
+  const handleNavigateToCategories = () => {
+    const categoriesParam = categories.length > 0 ? `?categories=${categories.join(',')}` : ''
+    router.push(`/${categoriesParam}`)
+  }
+
+  return (
+    <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center px-2 py-4 safe-area-inset">
+      <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative">
+        <FeedScreen 
+          categories={categories} 
+          onScenarioClick={handleScenarioClick}
+          onNavigateToCategories={handleNavigateToCategories}
+        />
+      </div>
+    </div>
+  )
+}
+
