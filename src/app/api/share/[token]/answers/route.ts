@@ -3,6 +3,8 @@ import { getDb } from '@/lib/db';
 import { validateName, validatePerspective } from '@/lib/utils';
 import { ObjectId } from 'mongodb';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(
   request: NextRequest,
   { params }: { params: { token: string } }

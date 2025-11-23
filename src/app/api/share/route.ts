@@ -3,6 +3,8 @@ import { getDb } from '@/lib/db';
 import { generateToken, getShareUrl } from '@/lib/utils';
 import { ObjectId } from 'mongodb';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const { scenarioId } = await request.json();

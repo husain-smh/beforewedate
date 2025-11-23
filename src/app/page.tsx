@@ -2,9 +2,9 @@
 
 import { CategoriesScreen } from '@/components/CategoriesScreen'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 
-export default function HomePage() {
+function HomeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
@@ -37,6 +37,20 @@ export default function HomePage() {
         />
       </div>
     </div>
+  )
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={
+      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center p-4 safe-area-inset">
+        <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center">
+          <div className="text-white">Loading...</div>
+        </div>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   )
 }
 
