@@ -21,9 +21,10 @@ export function CompareAnswersScreen({ scenario, userAnswer, onBack }: CompareAn
   const alignment = 85;
 
   return (
-    <div className="h-full flex flex-col bg-[#0B0B0D] relative overflow-hidden">
-      {/* Romantic gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-pink-900/10 to-transparent pointer-events-none" />
+    <div 
+      className="h-full flex flex-col relative overflow-hidden"
+      style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+    >
       
       {/* Confetti-like sparkles */}
       <motion.div
@@ -52,24 +53,38 @@ export function CompareAnswersScreen({ scenario, userAnswer, onBack }: CompareAn
       </motion.div>
       
       {/* Header */}
-      <div className="relative px-6 pt-14 pb-6 border-b border-white/5 z-20">
+      <div className="relative px-6 pt-14 pb-6 z-20">
         <button 
           onClick={onBack}
-          className="absolute left-6 top-14 text-gray-400 hover:text-white transition-colors"
+          className="flex items-center gap-2 transition-colors"
+          style={{ color: 'var(--color-text-secondary)' }}
         >
-          <ArrowLeft className="w-6 h-6" />
+          <ArrowLeft className="w-5 h-5" />
+          <span style={{ fontSize: 'var(--font-size-base)' }}>Back</span>
         </button>
 
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-center"
+          className="text-center mt-4"
         >
-          <h2 className="bg-gradient-to-r from-purple-300 via-pink-300 to-rose-300 bg-clip-text text-transparent mb-2">
+          <h2 
+            className="mb-2"
+            style={{
+              fontSize: 'var(--font-size-xl)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--color-text-primary)',
+              lineHeight: 'var(--line-height-tight)'
+            }}
+          >
             Your takes together
           </h2>
-          <p className="text-gray-400 text-sm">
+          <p style={{
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--color-text-secondary)',
+            lineHeight: 'var(--line-height-normal)'
+          }}>
             on "{scenario.title.substring(0, 50)}..."
           </p>
         </motion.div>
@@ -89,12 +104,29 @@ export function CompareAnswersScreen({ scenario, userAnswer, onBack }: CompareAn
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
               <span className="text-white text-sm">You</span>
             </div>
-            <span className="text-gray-400">Your take</span>
+            <span style={{ 
+              fontSize: 'var(--font-size-sm)',
+              color: 'var(--color-text-secondary)'
+            }}>
+              Your take
+            </span>
           </div>
           
-          <div className="relative bg-gradient-to-br from-[#1a1a1f] to-[#15151a] rounded-3xl p-5 border border-white/5 shadow-lg">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-3xl pointer-events-none" />
-            <p className="text-[#DAD9E8] leading-[1.7] relative z-10">
+          <div 
+            className="relative rounded-3xl p-5 shadow-lg"
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              border: `1px solid var(--color-input-border)`
+            }}
+          >
+            <p 
+              className="leading-[1.7] relative z-10"
+              style={{
+                color: 'var(--color-text-body)',
+                fontSize: 'var(--font-size-base)',
+                lineHeight: 'var(--line-height-relaxed)'
+              }}
+            >
               {userAnswer}
             </p>
           </div>
@@ -111,24 +143,45 @@ export function CompareAnswersScreen({ scenario, userAnswer, onBack }: CompareAn
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center shadow-lg shadow-teal-500/30">
               <Heart className="w-4 h-4 text-white" />
             </div>
-            <span className="text-gray-400">Their take</span>
+            <span style={{ 
+              fontSize: 'var(--font-size-sm)',
+              color: 'var(--color-text-secondary)'
+            }}>
+              Their take
+            </span>
           </div>
           
-          <div className="relative bg-gradient-to-br from-[#1a1a1f] to-[#15151a] rounded-3xl p-5 border border-teal-400/20 shadow-xl shadow-teal-500/10">
-            {/* Subtle highlight glow for partner's answer */}
-            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent rounded-3xl pointer-events-none" />
+          <div 
+            className="relative rounded-3xl p-5 shadow-xl"
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              border: `2px solid var(--color-icon-circle-start)`
+            }}
+          >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8 }}
               className="absolute -top-2 -right-2"
             >
-              <div className="bg-gradient-to-r from-pink-500 to-rose-400 rounded-full p-2 shadow-lg">
+              <div 
+                className="rounded-full p-2 shadow-lg"
+                style={{
+                  background: 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))'
+                }}
+              >
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
             </motion.div>
             
-            <p className="text-[#DAD9E8] leading-[1.7] relative z-10">
+            <p 
+              className="leading-[1.7] relative z-10"
+              style={{
+                color: 'var(--color-text-body)',
+                fontSize: 'var(--font-size-base)',
+                lineHeight: 'var(--line-height-relaxed)'
+              }}
+            >
               {partnerAnswer}
             </p>
           </div>
@@ -141,29 +194,57 @@ export function CompareAnswersScreen({ scenario, userAnswer, onBack }: CompareAn
           transition={{ duration: 0.5, delay: 1 }}
           className="mb-6"
         >
-          <div className="relative bg-gradient-to-br from-[#1a1a1f] to-[#15151a] rounded-3xl p-5 border border-white/5">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-teal-500/5 rounded-3xl pointer-events-none" />
-            
+          <div 
+            className="relative rounded-3xl p-5"
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              border: `1px solid var(--color-input-border)`
+            }}
+          >
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-gray-400">Your connection</span>
+                <span style={{ 
+                  fontSize: 'var(--font-size-sm)',
+                  color: 'var(--color-text-secondary)'
+                }}>
+                  Your connection
+                </span>
                 <div className="flex items-center gap-1">
-                  <Heart className="w-4 h-4 text-pink-400 fill-pink-400" />
-                  <span className="text-pink-400">{alignment}%</span>
+                  <Heart className="w-4 h-4" style={{ color: 'var(--color-button-primary-start)' }} fill="currentColor" />
+                  <span style={{ 
+                    fontSize: 'var(--font-size-sm)',
+                    color: 'var(--color-button-primary-start)',
+                    fontWeight: 'var(--font-weight-semibold)'
+                  }}>
+                    {alignment}%
+                  </span>
                 </div>
               </div>
               
               {/* Progress bar */}
-              <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+              <div 
+                className="h-2 rounded-full overflow-hidden"
+                style={{ backgroundColor: 'var(--color-input-bg)' }}
+              >
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${alignment}%` }}
                   transition={{ duration: 1, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-teal-400 rounded-full"
+                  className="h-full rounded-full"
+                  style={{
+                    background: 'linear-gradient(135deg, var(--color-icon-circle-start), var(--color-icon-circle-end))'
+                  }}
                 />
               </div>
               
-              <p className="text-gray-400 text-sm mt-3 text-center">
+              <p 
+                className="mt-3 text-center"
+                style={{
+                  fontSize: 'var(--font-size-sm)',
+                  color: 'var(--color-text-secondary)',
+                  lineHeight: 'var(--line-height-normal)'
+                }}
+              >
                 You're both seeing this from a similar place
               </p>
             </div>
@@ -176,13 +257,27 @@ export function CompareAnswersScreen({ scenario, userAnswer, onBack }: CompareAn
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3 }}
           whileTap={{ scale: 0.97 }}
-          className="relative w-full h-14 rounded-full overflow-hidden shadow-lg shadow-purple-500/20"
+          className="relative w-full overflow-hidden"
+          style={{
+            height: '56px',
+            borderRadius: 'var(--radius-full)',
+            background: 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))',
+            boxShadow: 'var(--shadow-lg)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 'var(--spacing-sm)'
+          }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-rose-400" />
-          <div className="absolute inset-0 flex items-center justify-center text-white gap-2">
-            <MessageCircle className="w-5 h-5" />
-            <span className="tracking-wide">Discuss this together</span>
-          </div>
+          <MessageCircle className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
+          <span style={{
+            color: 'var(--color-button-text)',
+            fontSize: 'var(--font-size-base)',
+            fontWeight: 'var(--font-weight-semibold)',
+            letterSpacing: '0.025em'
+          }}>
+            Discuss this together
+          </span>
         </motion.button>
 
         {/* Soft encouraging message */}
@@ -190,7 +285,12 @@ export function CompareAnswersScreen({ scenario, userAnswer, onBack }: CompareAn
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="text-center text-gray-500 text-sm mt-4"
+          className="text-center mt-4"
+          style={{
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--color-text-muted)',
+            lineHeight: 'var(--line-height-normal)'
+          }}
         >
           Honest conversations strengthen relationships ✨
         </motion.p>

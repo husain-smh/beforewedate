@@ -5,44 +5,128 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Design System Tokens - Extracted from Design Images */
+  
+  /* Colors - Background Gradient */
+  --color-bg-gradient-start: #FDF2F8; /* Light pink */
+  --color-bg-gradient-mid: #FCE7F3; /* Soft pink */
+  --color-bg-gradient-end: #F3E8FF; /* Lavender pink */
+  
+  /* Colors - Card & Surface */
+  --color-card-bg: #FFFFFF;
+  --color-card-shadow: rgba(0, 0, 0, 0.08);
+  --color-card-shadow-hover: rgba(0, 0, 0, 0.12);
+  
+  /* Colors - Text */
+  --color-text-primary: #4C1D95; /* Dark purple for headings */
+  --color-text-secondary: #6B7280; /* Grey for subtitles */
+  --color-text-body: #374151; /* Dark grey for body text */
+  --color-text-muted: #9CA3AF; /* Light grey for muted text */
+  
+  /* Colors - Category Tags */
+  --color-tag-bg: #F3E8FF; /* Light purple background */
+  --color-tag-text: #7C3AED; /* Purple text */
+  --color-tag-border: #E9D5FF; /* Light purple border */
+  
+  /* Colors - Icon Circles */
+  --color-icon-circle-start: #A855F7; /* Purple gradient start */
+  --color-icon-circle-end: #EC4899; /* Pink gradient end */
+  
+  /* Colors - Buttons */
+  --color-button-primary-start: #F472B6; /* Pink gradient start */
+  --color-button-primary-end: #EC4899; /* Pink gradient end */
+  --color-button-text: #FFFFFF;
+  --color-button-shadow: rgba(244, 114, 182, 0.3);
+  
+  /* Colors - Input Fields */
+  --color-input-bg: #FDF2F8; /* Light pink background */
+  --color-input-border: #FBCFE8; /* Light pink border */
+  --color-input-text: #4C1D95; /* Dark purple text */
+  --color-input-placeholder: #A78BFA; /* Light purple placeholder */
+  
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-2xl: 3rem; /* 48px */
+  
+  /* Border Radius */
+  --radius-sm: 0.5rem; /* 8px */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 1rem; /* 16px */
+  --radius-xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+  
+  /* Typography */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-base: 200ms;
+  --transition-slow: 300ms;
+  
+  /* Legacy variables for compatibility */
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
-  --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
+  --background: var(--color-bg-gradient-start);
+  --foreground: var(--color-text-primary);
+  --card: var(--color-card-bg);
+  --card-foreground: var(--color-text-primary);
+  --popover: var(--color-card-bg);
+  --popover-foreground: var(--color-text-primary);
+  --primary: var(--color-text-primary);
+  --primary-foreground: var(--color-button-text);
+  --secondary: var(--color-tag-bg);
+  --secondary-foreground: var(--color-tag-text);
+  --muted: var(--color-input-bg);
+  --muted-foreground: var(--color-text-secondary);
+  --accent: var(--color-tag-bg);
+  --accent-foreground: var(--color-tag-text);
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
+  --border: var(--color-input-border);
   --input: transparent;
-  --input-background: #f3f3f5;
+  --input-background: var(--color-input-bg);
   --switch-background: #cbced4;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: oklch(0.708 0 0);
+  --ring: var(--color-icon-circle-start);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.75rem;
+  --sidebar: var(--color-card-bg);
+  --sidebar-foreground: var(--color-text-primary);
+  --sidebar-primary: var(--color-text-primary);
+  --sidebar-primary-foreground: var(--color-button-text);
+  --sidebar-accent: var(--color-tag-bg);
+  --sidebar-accent-foreground: var(--color-tag-text);
+  --sidebar-border: var(--color-input-border);
+  --sidebar-ring: var(--color-icon-circle-start);
 }
 
 .dark {
@@ -136,12 +220,18 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    background: linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end));
+    color: var(--color-text-primary);
     height: 100%;
     height: 100dvh; /* Dynamic viewport height - adjusts for mobile browser UI */
     overflow: hidden;
     position: fixed;
     width: 100%;
+  }
+
+  /* Ensure all text elements have proper default colors */
+  h1, h2, h3, h4, h5, h6, p, span, div, button, a {
+    color: inherit;
   }
 
   /* Safe area support for mobile browsers */
@@ -150,6 +240,13 @@
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
+  }
+
+  /* Input placeholder styling */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-input-placeholder);
+    opacity: 1;
   }
 }
 

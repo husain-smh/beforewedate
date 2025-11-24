@@ -77,9 +77,15 @@ export default function SharePage() {
 
   if (loading) {
     return (
-      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center px-2 py-4 safe-area-inset">
-        <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center">
-          <div className="text-white">Loading...</div>
+      <div 
+        className="h-screen-dynamic flex items-center justify-center px-2 py-4 safe-area-inset"
+        style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+      >
+        <div 
+          className="w-full max-w-md h-full max-h-screen-dynamic rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center"
+          style={{ backgroundColor: 'var(--color-card-bg)' }}
+        >
+          <div style={{ color: 'var(--color-text-primary)' }}>Loading...</div>
         </div>
       </div>
     )
@@ -87,13 +93,19 @@ export default function SharePage() {
 
   if (!shareData) {
     return (
-      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center px-2 py-4 safe-area-inset">
-        <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center">
-          <div className="text-white text-center px-3">
+      <div 
+        className="h-screen-dynamic flex items-center justify-center px-2 py-4 safe-area-inset"
+        style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+      >
+        <div 
+          className="w-full max-w-md h-full max-h-screen-dynamic rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center"
+          style={{ backgroundColor: 'var(--color-card-bg)' }}
+        >
+          <div className="text-center px-3" style={{ color: 'var(--color-text-primary)' }}>
             <p className="mb-4">Share link not found</p>
             <button
               onClick={() => router.push('/')}
-              className="text-pink-400 hover:text-pink-300"
+              style={{ color: 'var(--color-button-primary-start)' }}
             >
               Go to home
             </button>
@@ -104,56 +116,95 @@ export default function SharePage() {
   }
 
   return (
-    <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center px-2 py-4 safe-area-inset">
-      <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative">
-        <div className="h-full flex flex-col bg-[#0B0B0D] relative overflow-hidden">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-pink-900/5 to-transparent pointer-events-none" />
+    <div 
+      className="h-screen-dynamic flex items-center justify-center px-2 py-4 safe-area-inset"
+      style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+    >
+      <div 
+        className="w-full max-w-md h-full max-h-screen-dynamic rounded-[40px] overflow-hidden shadow-2xl relative"
+        style={{ backgroundColor: 'var(--color-card-bg)' }}
+      >
+        <div 
+          className="h-full flex flex-col relative overflow-hidden"
+          style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+        >
           
           {/* Header */}
-          <div className="relative px-3 pt-14 pb-3 border-b border-white/5 z-20">
+          <div className="relative px-6 pt-14 pb-4 z-20">
             <button 
               onClick={() => router.push('/')}
-              className="absolute left-3 top-14 text-gray-400 hover:text-white transition-colors"
+              className="flex items-center gap-2 transition-colors"
+              style={{ color: 'var(--color-text-secondary)' }}
             >
-              <ArrowLeft className="w-6 h-6" />
+              <ArrowLeft className="w-5 h-5" />
+              <span style={{ fontSize: 'var(--font-size-base)' }}>Back</span>
             </button>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center"
-            >
-              <h2 className="text-gray-400">Shared Scenario</h2>
-            </motion.div>
           </div>
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto px-3 py-3 relative z-10">
+          <div className="flex-1 overflow-y-auto px-6 py-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
               {/* Category chip */}
-              <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-400/30 mb-2 shadow-sm shadow-purple-500/20">
-                <span className="text-purple-300">{shareData.scenario.category}</span>
+              <div 
+                className="inline-flex items-center mb-4"
+                style={{
+                  padding: 'var(--spacing-sm) var(--spacing-md)',
+                  borderRadius: 'var(--radius-md)',
+                  backgroundColor: 'var(--color-tag-bg)',
+                  border: `1px solid var(--color-tag-border)`
+                }}
+              >
+                <span style={{ 
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: 'var(--font-weight-medium)',
+                  color: 'var(--color-tag-text)'
+                }}>
+                  {shareData.scenario.category}
+                </span>
               </div>
 
               {/* Title */}
-              <h1 className="text-white mb-2 leading-tight text-lg">
+              <h1 
+                className="mb-4"
+                style={{
+                  fontSize: 'var(--font-size-2xl)',
+                  fontWeight: 'var(--font-weight-bold)',
+                  color: 'var(--color-text-primary)',
+                  lineHeight: 'var(--line-height-tight)'
+                }}
+              >
                 {shareData.scenario.title}
               </h1>
 
-              {/* Story - no container, smaller font */}
-              <p className="text-[#DAD9E8] text-sm leading-[1.7] whitespace-pre-line mb-4">
+              {/* Story */}
+              <p 
+                className="mb-6 whitespace-pre-line"
+                style={{
+                  fontSize: 'var(--font-size-base)',
+                  color: 'var(--color-text-body)',
+                  lineHeight: 'var(--line-height-relaxed)'
+                }}
+              >
                 {shareData.scenario.fullText}
               </p>
 
               {/* Existing Answers */}
               {shareData.answers.length > 0 && (
-                <div className="mb-4">
-                  <h3 className="text-white mb-3 text-sm">What others think:</h3>
+                <div className="mb-6">
+                  <h3 
+                    className="mb-3"
+                    style={{
+                      fontSize: 'var(--font-size-base)',
+                      fontWeight: 'var(--font-weight-semibold)',
+                      color: 'var(--color-text-primary)'
+                    }}
+                  >
+                    What others think:
+                  </h3>
                   {shareData.answers.map((answer, index) => (
                     <motion.div
                       key={answer.id}
@@ -161,15 +212,39 @@ export default function SharePage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
                       className="mb-4"
+                      style={{
+                        padding: 'var(--spacing-md)',
+                        borderRadius: 'var(--radius-lg)',
+                        backgroundColor: 'var(--color-input-bg)',
+                        border: `1px solid var(--color-input-border)`
+                      }}
                     >
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center">
-                          <span className="text-white text-xs">{answer.name.charAt(0).toUpperCase()}</span>
+                        <div 
+                          className="rounded-full flex items-center justify-center"
+                          style={{
+                            width: '32px',
+                            height: '32px',
+                            background: 'linear-gradient(135deg, var(--color-icon-circle-start), var(--color-icon-circle-end))'
+                          }}
+                        >
+                          <span style={{ color: 'white', fontSize: 'var(--font-size-xs)' }}>
+                            {answer.name.charAt(0).toUpperCase()}
+                          </span>
                         </div>
-                        <span className="text-gray-400 text-sm">{answer.name}</span>
+                        <span style={{ 
+                          fontSize: 'var(--font-size-sm)',
+                          color: 'var(--color-text-body)',
+                          fontWeight: 'var(--font-weight-medium)'
+                        }}>
+                          {answer.name}
+                        </span>
                       </div>
-                      {/* Answer text - no container */}
-                      <p className="text-[#DAD9E8] text-sm leading-[1.7]">
+                      <p style={{
+                        fontSize: 'var(--font-size-sm)',
+                        color: 'var(--color-text-body)',
+                        lineHeight: 'var(--line-height-relaxed)'
+                      }}>
                         {answer.perspective}
                       </p>
                     </motion.div>
@@ -179,7 +254,16 @@ export default function SharePage() {
 
               {/* Add Your Answer Section */}
               <div className="mb-4">
-                <h3 className="text-white mb-3 text-sm">What's your honest take?</h3>
+                <h3 
+                  className="mb-3"
+                  style={{
+                    fontSize: 'var(--font-size-base)',
+                    fontWeight: 'var(--font-weight-semibold)',
+                    color: 'var(--color-text-primary)'
+                  }}
+                >
+                  What's your honest take?
+                </h3>
                 
                 <input
                   type="text"
@@ -187,33 +271,63 @@ export default function SharePage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your name (optional)"
                   maxLength={40}
-                  className="w-full bg-[#15151a] rounded-2xl border border-white/5 text-[#DAD9E8] placeholder-gray-500 p-3 mb-3 outline-none focus:border-white/10 transition-colors"
+                  className="w-full mb-3 outline-none transition-colors"
+                  style={{
+                    padding: 'var(--spacing-md)',
+                    borderRadius: 'var(--radius-lg)',
+                    backgroundColor: 'var(--color-input-bg)',
+                    border: `1px solid var(--color-input-border)`,
+                    color: 'var(--color-input-text)',
+                    fontSize: 'var(--font-size-base)'
+                  }}
                 />
                 
-                <div className="relative bg-[#15151a] rounded-3xl border border-white/5 overflow-hidden shadow-inner">
-                  <textarea
-                    value={perspective}
-                    onChange={(e) => setPerspective(e.target.value)}
-                    placeholder="Write your honest take…"
-                    maxLength={5000}
-                    className="w-full bg-transparent text-[#DAD9E8] placeholder-gray-500 p-4 min-h-[120px] resize-none outline-none"
-                    style={{ lineHeight: '1.7' }}
-                  />
-                </div>
+                <textarea
+                  value={perspective}
+                  onChange={(e) => setPerspective(e.target.value)}
+                  placeholder="Write your honest take…"
+                  maxLength={5000}
+                  className="w-full resize-none outline-none mb-4"
+                  style={{
+                    padding: 'var(--spacing-md)',
+                    borderRadius: 'var(--radius-lg)',
+                    backgroundColor: 'var(--color-input-bg)',
+                    border: `1px solid var(--color-input-border)`,
+                    color: 'var(--color-input-text)',
+                    fontSize: 'var(--font-size-base)',
+                    lineHeight: 'var(--line-height-relaxed)',
+                    minHeight: '120px'
+                  }}
+                />
 
                 <motion.button
                   whileTap={{ scale: 0.97 }}
                   onClick={handleSubmit}
                   disabled={!perspective.trim() || submitting}
-                  className={`relative w-full h-12 rounded-full overflow-hidden mt-4 transition-opacity ${
-                    !perspective.trim() || submitting ? 'opacity-40 cursor-not-allowed' : 'shadow-lg shadow-pink-500/20'
-                  }`}
+                  className="relative w-full overflow-hidden transition-all duration-300"
+                  style={{
+                    height: '56px',
+                    borderRadius: 'var(--radius-full)',
+                    background: (!perspective.trim() || submitting)
+                      ? 'linear-gradient(135deg, #E5E7EB, #D1D5DB)'
+                      : 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))',
+                    boxShadow: (!perspective.trim() || submitting) ? 'none' : 'var(--shadow-lg)',
+                    opacity: (!perspective.trim() || submitting) ? 0.5 : 1,
+                    cursor: (!perspective.trim() || submitting) ? 'not-allowed' : 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 'var(--spacing-sm)'
+                  }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-rose-400" />
-                  <div className="absolute inset-0 flex items-center justify-center text-white gap-2">
-                    <span className="tracking-wide">{submitting ? 'Submitting...' : 'Share your take'}</span>
-                    <Send className="w-4 h-4" />
-                  </div>
+                  <span style={{
+                    color: 'var(--color-button-text)',
+                    fontSize: 'var(--font-size-base)',
+                    fontWeight: 'var(--font-weight-semibold)'
+                  }}>
+                    {submitting ? 'Submitting...' : 'Share your take'}
+                  </span>
+                  <Send className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
                 </motion.button>
               </div>
             </motion.div>

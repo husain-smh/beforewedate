@@ -58,17 +58,29 @@ export default function ComparePage() {
 
   if (loading || !scenario) {
     return (
-      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center p-4 safe-area-inset">
-        <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center">
-          <div className="text-white">{loading ? 'Loading...' : 'Scenario not found'}</div>
+      <div 
+        className="h-screen-dynamic flex items-center justify-center p-4 safe-area-inset"
+        style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+      >
+        <div 
+          className="w-full max-w-md h-full max-h-screen-dynamic rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center"
+          style={{ backgroundColor: 'var(--color-card-bg)' }}
+        >
+          <div style={{ color: 'var(--color-text-primary)' }}>{loading ? 'Loading...' : 'Scenario not found'}</div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center p-4 safe-area-inset">
-      <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative">
+    <div 
+      className="h-screen-dynamic flex items-center justify-center p-4 safe-area-inset"
+      style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+    >
+      <div 
+        className="w-full max-w-md h-full max-h-screen-dynamic rounded-[40px] overflow-hidden shadow-2xl relative"
+        style={{ backgroundColor: 'var(--color-card-bg)' }}
+      >
         <CompareAnswersScreen
           scenario={scenario}
           userAnswer={userAnswer}

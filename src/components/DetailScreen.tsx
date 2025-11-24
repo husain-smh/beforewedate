@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Share2, Heart, Copy, Check } from 'lucide-react';
+import { ArrowLeft, Send, Share2, Heart, Copy, Check } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -23,6 +23,7 @@ interface DetailScreenProps {
 }
 
 export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenProps) {
+  const [answer, setAnswer] = useState('');
   const [isSharing, setIsSharing] = useState(false);
   const [shareUrl, setShareUrl] = useState<string>('');
   const [showShareDialog, setShowShareDialog] = useState(false);
@@ -63,81 +64,153 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
     }
   };
 
+  const handleSubmit = () => {
+    if (answer.trim()) {
+      onAnswerSubmit(answer);
+    }
+  };
+
   return (
     <>
-      <div className="h-full flex flex-col bg-[#0B0B0D] relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-pink-900/5 to-transparent pointer-events-none" />
-      
-      {/* Header */}
-      <div className="relative px-3 pt-14 pb-3 border-b border-white/5 z-20">
-        <button 
-          onClick={onBack}
-          className="absolute left-3 top-14 text-gray-400 hover:text-white transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </button>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center"
-        >
-          <h2 className="text-gray-400">Scene</h2>
-        </motion.div>
-      </div>
-
-      {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto px-3 py-3 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* Category chip - enhanced */}
-          <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-400/30 mb-2 shadow-sm shadow-purple-500/20">
-            <span className="text-purple-300">{scenario.category}</span>
-          </div>
-
-          {/* Title */}
-          <h1 className="text-white mb-2 leading-tight text-lg">
-            {scenario.title}
-          </h1>
-
-          {/* Story - no container, smaller font */}
-          <p className="text-[#DAD9E8] text-sm leading-[1.7] whitespace-pre-line mb-3">
-            {scenario.fullText}
-          </p>
-
-          {/* Share Button - with heart pulse animation */}
-          <motion.button
-            whileTap={{ scale: 0.97 }}
-            onClick={handleShare}
-            disabled={isSharing}
-            className="relative w-full h-14 rounded-full overflow-hidden mb-4 shadow-lg shadow-pink-500/20 group disabled:opacity-50"
+      <div 
+        className="h-full flex flex-col relative overflow-hidden"
+        style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+      >
+        {/* Header */}
+        <div className="relative px-6 pt-14 pb-4 z-20">
+          <button 
+            onClick={onBack}
+            className="flex items-center gap-2 transition-colors"
+            style={{ color: 'var(--color-text-secondary)' }}
           >
-            <div className="absolute inset-0 bg-pink-500" />
-            
-            {/* Heart pulse effect */}
-            {isSharing && (
-              <motion.div
-                initial={{ scale: 1, opacity: 0.5 }}
-                animate={{ scale: 2, opacity: 0 }}
-                transition={{ duration: 0.6 }}
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                <Heart className="w-8 h-8 text-white fill-white" />
-              </motion.div>
-            )}
-            
-            <div className="absolute inset-0 flex items-center justify-center text-white gap-2">
-              <Share2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span className="tracking-wide">{isSharing ? 'Creating link...' : 'Ask your partner'}</span>
+            <ArrowLeft className="w-5 h-5" />
+            <span style={{ fontSize: 'var(--font-size-base)' }}>Back to Scenarios</span>
+          </button>
+        </div>
+
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto px-6 py-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* Category tag */}
+            <div 
+              className="inline-flex items-center mb-4"
+              style={{
+                padding: 'var(--spacing-sm) var(--spacing-md)',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--color-tag-bg)',
+                border: `1px solid var(--color-tag-border)`
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-sm)',
+                fontWeight: 'var(--font-weight-medium)',
+                color: 'var(--color-tag-text)'
+              }}>
+                {scenario.category}
+              </span>
             </div>
-          </motion.button>
-        </motion.div>
+
+            {/* Title */}
+            <h1 
+              className="mb-6"
+              style={{
+                fontSize: 'var(--font-size-2xl)',
+                fontWeight: 'var(--font-weight-bold)',
+                color: 'var(--color-text-primary)',
+                lineHeight: 'var(--line-height-tight)'
+              }}
+            >
+              {scenario.title}
+            </h1>
+
+            {/* Prompt Box */}
+            <div 
+              className="mb-4"
+              style={{
+                padding: 'var(--spacing-md)',
+                borderRadius: 'var(--radius-lg)',
+                backgroundColor: 'var(--color-input-bg)',
+                border: `1px solid var(--color-input-border)`
+              }}
+            >
+              <p style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-text-body)',
+                lineHeight: 'var(--line-height-normal)'
+              }}>
+                Share your honest thoughts. What would you do in this situation and why?
+              </p>
+            </div>
+
+            {/* Input Field */}
+            <textarea
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              placeholder="Type your answer here..."
+              className="w-full mb-6 resize-none"
+              style={{
+                padding: 'var(--spacing-md)',
+                borderRadius: 'var(--radius-lg)',
+                backgroundColor: 'var(--color-input-bg)',
+                border: `1px solid var(--color-input-border)`,
+                color: 'var(--color-input-text)',
+                fontSize: 'var(--font-size-base)',
+                lineHeight: 'var(--line-height-normal)',
+                minHeight: '120px',
+                fontFamily: 'inherit'
+              }}
+            />
+
+            {/* Submit Button */}
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              onClick={handleSubmit}
+              disabled={!answer.trim()}
+              className="relative w-full overflow-hidden transition-all duration-300 mb-4"
+              style={{
+                height: '56px',
+                borderRadius: 'var(--radius-full)',
+                background: answer.trim()
+                  ? 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))'
+                  : 'linear-gradient(135deg, #E5E7EB, #D1D5DB)',
+                boxShadow: answer.trim() ? 'var(--shadow-lg)' : 'none',
+                opacity: answer.trim() ? 1 : 0.5,
+                cursor: answer.trim() ? 'pointer' : 'not-allowed',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'var(--spacing-sm)',
+                marginLeft: 'auto'
+              }}
+            >
+              <span style={{
+                color: 'var(--color-button-text)',
+                fontSize: 'var(--font-size-base)',
+                fontWeight: 'var(--font-weight-semibold)'
+              }}>
+                Submit
+              </span>
+              <Send className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
+            </motion.button>
+
+            {/* Disclaimer */}
+            <p 
+              className="text-center"
+              style={{
+                fontSize: 'var(--font-size-xs)',
+                color: 'var(--color-text-muted)',
+                lineHeight: 'var(--line-height-normal)'
+              }}
+            >
+              Your answer will be saved and can be shared with your partner.
+            </p>
+          </motion.div>
+        </div>
       </div>
-    </div>
 
       {/* Share Link Dialog */}
       <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>

@@ -48,34 +48,49 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
   const displayScenarios = scenarios;
 
   return (
-    <div className="h-full flex flex-col bg-[#0B0B0D]">
+    <div 
+      className="h-full flex flex-col"
+      style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+    >
       {/* Header with App Name */}
-      <div className="relative px-3 pt-14 pb-4 border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-transparent pointer-events-none" />
-
+      <div className="relative px-6 pt-14 pb-4">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center relative z-10"
         >
-          <h2 className="bg-gradient-to-r from-purple-300 via-pink-300 to-rose-300 bg-clip-text text-transparent text-xl">
+          <h2 
+            style={{
+              fontSize: 'var(--font-size-xl)',
+              fontWeight: 'var(--font-weight-bold)',
+              color: 'var(--color-text-primary)',
+              lineHeight: 'var(--line-height-tight)'
+            }}
+          >
             Know That Person
           </h2>
-          <p className="text-gray-400 text-sm mt-1">
+          <p 
+            className="mt-1"
+            style={{
+              fontSize: 'var(--font-size-sm)',
+              color: 'var(--color-text-secondary)',
+              lineHeight: 'var(--line-height-normal)'
+            }}
+          >
             Scenarios for you
           </p>
         </motion.div>
       </div>
 
       {/* Scrollable Feed */}
-      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
+      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="text-gray-400">Loading scenarios...</div>
+            <div style={{ color: 'var(--color-text-secondary)' }}>Loading scenarios...</div>
           </div>
         ) : displayScenarios.length === 0 ? (
           <div className="flex items-center justify-center py-20">
-            <div className="text-gray-400">No scenarios found</div>
+            <div style={{ color: 'var(--color-text-secondary)' }}>No scenarios found</div>
           </div>
         ) : (
           displayScenarios.map((scenario, index) => (
@@ -90,34 +105,62 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
             }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onScenarioClick(scenario)}
-            className="w-full text-left"
+            className="w-full text-left transition-all duration-300"
+            style={{
+              backgroundColor: 'var(--color-card-bg)',
+              borderRadius: 'var(--radius-lg)',
+              padding: 'var(--spacing-lg)',
+              boxShadow: 'var(--shadow-md)'
+            }}
           >
-            <div className="relative bg-gradient-to-br from-[#1a1a1f] to-[#15151a] rounded-3xl p-5 border border-white/5 hover:border-white/10 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-purple-500/10">
-              {/* Subtle glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-pink-500/5 rounded-3xl pointer-events-none" />
-              
-              <div className="relative z-10">
-                {/* Category chip - enhanced with gradient ring */}
-                <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-400/30 mb-2 shadow-sm shadow-purple-500/20">
-                  <span className="text-purple-300">{scenario.category}</span>
-                </div>
+            {/* Category tag */}
+            <div 
+              className="inline-flex items-center mb-3"
+              style={{
+                padding: 'var(--spacing-sm) var(--spacing-md)',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--color-tag-bg)',
+                border: `1px solid var(--color-tag-border)`
+              }}
+            >
+              <span style={{ 
+                fontSize: 'var(--font-size-sm)',
+                fontWeight: 'var(--font-weight-medium)',
+                color: 'var(--color-tag-text)'
+              }}>
+                {scenario.category}
+              </span>
+            </div>
 
-                {/* Title - more prominent */}
-                <h3 className="text-white mb-2 leading-snug pr-2">
-                  {scenario.title}
-                </h3>
+            {/* Title */}
+            <h3 
+              className="mb-2"
+              style={{
+                fontSize: 'var(--font-size-lg)',
+                fontWeight: 'var(--font-weight-semibold)',
+                color: 'var(--color-text-primary)',
+                lineHeight: 'var(--line-height-tight)'
+              }}
+            >
+              {scenario.title}
+            </h3>
 
-                {/* Preview - softer color for better readability */}
-                <p className="text-[#B8B7C8] mb-3 leading-[1.7] line-clamp-3">
-                  {scenario.preview}
-                </p>
+            {/* Preview */}
+            <p 
+              className="mb-3 line-clamp-3"
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-text-body)',
+                lineHeight: 'var(--line-height-relaxed)'
+              }}
+            >
+              {scenario.preview}
+            </p>
 
-                {/* Read more */}
-                <div className="flex items-center text-pink-400 group">
-                  <span className="mr-1">Read more</span>
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
+            {/* Read more */}
+            <div className="flex items-center gap-1" style={{ color: 'var(--color-button-primary-start)' }}>
+              <span style={{ fontSize: 'var(--font-size-sm)' }}>Read more</span>
+              <ChevronRight className="w-4 h-4" />
             </div>
           </motion.button>
           ))
@@ -125,19 +168,35 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
       </div>
 
       {/* Bottom Navigation */}
-      <div className="border-t border-white/5 px-3 py-4 bg-[#0B0B0D]">
+      <div 
+        className="px-6 py-4"
+        style={{
+          borderTop: `1px solid var(--color-input-border)`,
+          backgroundColor: 'var(--color-card-bg)'
+        }}
+      >
         <div className="flex items-center justify-around">
-          <button className="flex flex-col items-center text-pink-400 transition-colors">
+          <button 
+            className="flex flex-col items-center transition-colors"
+            style={{ color: 'var(--color-button-primary-start)' }}
+          >
             <Home className="w-6 h-6 mb-1" />
-            <span className="text-xs">Home</span>
+            <span style={{ fontSize: 'var(--font-size-xs)' }}>Home</span>
           </button>
-          <button onClick={onNavigateToCategories} className="flex flex-col items-center text-gray-500 hover:text-gray-300 transition-colors">
+          <button 
+            onClick={onNavigateToCategories} 
+            className="flex flex-col items-center transition-colors"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
             <Grid3x3 className="w-6 h-6 mb-1" />
-            <span className="text-xs">Categories</span>
+            <span style={{ fontSize: 'var(--font-size-xs)' }}>Categories</span>
           </button>
-          <button className="flex flex-col items-center text-gray-500 hover:text-gray-300 transition-colors">
+          <button 
+            className="flex flex-col items-center transition-colors"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
             <User className="w-6 h-6 mb-1" />
-            <span className="text-xs">You</span>
+            <span style={{ fontSize: 'var(--font-size-xs)' }}>You</span>
           </button>
         </div>
       </div>

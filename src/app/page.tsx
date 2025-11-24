@@ -28,8 +28,17 @@ function HomeContent() {
   }
 
   return (
-    <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center p-4 safe-area-inset">
-      <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative">
+    <div 
+      className="h-screen-dynamic flex items-center justify-center p-4 safe-area-inset"
+      style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+    >
+      <div 
+        className="w-full max-w-md h-full max-h-screen-dynamic rounded-[40px] overflow-hidden shadow-2xl relative"
+        style={{ 
+          backgroundColor: 'var(--color-card-bg)',
+          color: 'var(--color-text-primary)'
+        }}
+      >
         <CategoriesScreen 
           onContinue={handleContinue}
           initialSelected={selectedCategories}
@@ -43,9 +52,15 @@ function HomeContent() {
 export default function HomePage() {
   return (
     <Suspense fallback={
-      <div className="h-screen-dynamic bg-[#0B0B0D] flex items-center justify-center p-4 safe-area-inset">
-        <div className="w-full max-w-md h-full max-h-screen-dynamic bg-[#0B0B0D] rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center">
-          <div className="text-white">Loading...</div>
+      <div 
+        className="h-screen-dynamic flex items-center justify-center p-4 safe-area-inset"
+        style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+      >
+        <div 
+          className="w-full max-w-md h-full max-h-screen-dynamic rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center"
+          style={{ backgroundColor: 'var(--color-card-bg)' }}
+        >
+          <div style={{ color: 'var(--color-text-primary)' }}>Loading...</div>
         </div>
       </div>
     }>
