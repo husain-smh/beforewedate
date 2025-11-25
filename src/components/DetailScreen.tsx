@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Send, Share2, Heart, Copy, Check } from 'lucide-react';
+import { ArrowLeft, Send, Share2, Copy, Check } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -65,6 +65,12 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
     }
   };
 
+  const handleOpenShareLink = () => {
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   const handleSubmit = () => {
     if (answer.trim()) {
       onAnswerSubmit(answer);
@@ -74,11 +80,11 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
   return (
     <>
       <div 
-        className="h-full flex flex-col relative overflow-hidden"
+        className="flex flex-col relative"
         style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
       >
         {/* Header */}
-        <div className="relative px-6 pt-14 pb-4 z-20">
+        <div className="relative px-6 pt-6 md:pt-8 pb-4 z-20">
           <button 
             onClick={onBack}
             className="flex items-center gap-2 transition-colors"
@@ -90,7 +96,7 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto px-6 py-4 relative z-10">
+        <div className="px-6 py-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -174,37 +180,67 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
               />
             </div>
 
-            {/* Submit Button */}
-            <motion.button
-              whileTap={{ scale: 0.97 }}
-              onClick={handleSubmit}
-              disabled={!answer.trim()}
-              className="relative w-full overflow-hidden transition-all duration-300 mb-4"
-              style={{
-                height: '56px',
-                borderRadius: 'var(--radius-full)',
-                background: answer.trim()
-                  ? 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))'
-                  : 'linear-gradient(135deg, #E5E7EB, #D1D5DB)',
-                boxShadow: answer.trim() ? 'var(--shadow-lg)' : 'none',
-                opacity: answer.trim() ? 1 : 0.5,
-                cursor: answer.trim() ? 'pointer' : 'not-allowed',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 'var(--spacing-sm)',
-                marginLeft: 'auto'
-              }}
-            >
-              <span style={{
-                color: 'var(--color-button-text)',
-                fontSize: 'var(--font-size-base)',
-                fontWeight: 'var(--font-weight-semibold)'
-              }}>
-                Submit
-              </span>
-              <Send className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
-            </motion.button>
+            {/* Share + Submit Actions */}
+            <div className="flex flex-col gap-3 mb-4">
+              <motion.button
+                whileTap={{ scale: 0.97 }}
+                onClick={handleShare}
+                disabled={isSharing}
+                className="relative w-full overflow-hidden transition-all duration-300"
+                style={{
+                  height: '56px',
+                  borderRadius: 'var(--radius-full)',
+                  border: `1px solid var(--color-input-border)`,
+                  backgroundColor: 'var(--color-card-bg)',
+                  boxShadow: 'var(--shadow-sm)',
+                  opacity: isSharing ? 0.6 : 1,
+                  cursor: isSharing ? 'not-allowed' : 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 'var(--spacing-sm)'
+                }}
+              >
+                <Share2 className="w-5 h-5" style={{ color: 'var(--color-text-primary)' }} />
+                <span style={{
+                  color: 'var(--color-text-primary)',
+                  fontSize: 'var(--font-size-base)',
+                  fontWeight: 'var(--font-weight-semibold)'
+                }}>
+                  {isSharing ? 'Generating link...' : 'Share with your partner'}
+                </span>
+              </motion.button>
+
+              <motion.button
+                whileTap={{ scale: 0.97 }}
+                onClick={handleSubmit}
+                disabled={!answer.trim()}
+                className="relative w-full overflow-hidden transition-all duration-300"
+                style={{
+                  height: '56px',
+                  borderRadius: 'var(--radius-full)',
+                  background: answer.trim()
+                    ? 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))'
+                    : 'linear-gradient(135deg, #E5E7EB, #D1D5DB)',
+                  boxShadow: answer.trim() ? 'var(--shadow-lg)' : 'none',
+                  opacity: answer.trim() ? 1 : 0.5,
+                  cursor: answer.trim() ? 'pointer' : 'not-allowed',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 'var(--spacing-sm)'
+                }}
+              >
+                <span style={{
+                  color: 'var(--color-button-text)',
+                  fontSize: 'var(--font-size-base)',
+                  fontWeight: 'var(--font-weight-semibold)'
+                }}>
+                  Submit
+                </span>
+                <Send className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
+              </motion.button>
+            </div>
 
             {/* Disclaimer */}
             <p 
@@ -262,6 +298,21 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
               Send this link to your partner to see their perspective. You can write yours too.
             </p>
           </div>
+
+          {shareUrl && (
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              onClick={handleOpenShareLink}
+              className="w-full rounded-full py-3 font-semibold text-sm tracking-wide"
+              style={{
+                background: 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))',
+                color: 'var(--color-button-text)',
+                boxShadow: 'var(--shadow-md)'
+              }}
+            >
+              Open private link
+            </motion.button>
+          )}
         </DialogContent>
       </Dialog>
     </>

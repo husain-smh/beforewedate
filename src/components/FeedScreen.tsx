@@ -49,11 +49,11 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
 
   return (
     <div 
-      className="h-full flex flex-col"
+      className="flex flex-col"
       style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
     >
       {/* Header with App Name */}
-      <div className="relative px-6 pt-14 pb-4">
+      <div className="relative px-6 pt-6 md:pt-8 pb-4">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,7 +83,7 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
       </div>
 
       {/* Scrollable Feed */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+      <div className="px-6 py-4 space-y-4">
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <div style={{ color: 'var(--color-text-secondary)' }}>Loading scenarios...</div>

@@ -7,6 +7,7 @@ interface Category {
   name: string;
   icon: ReactElement;
   iconColor: string;
+  accentVar: string;
 }
 
 const categories: Category[] = [
@@ -14,25 +15,29 @@ const categories: Category[] = [
     id: 'relationship-dynamics',
     name: 'Relationship Dynamics',
     icon: <Heart className="w-6 h-6" />,
-    iconColor: '#EF4444' // Red
+    iconColor: '#EF4444', // Red
+    accentVar: '--color-pastel-blush'
   },
   {
     id: 'loyalty',
     name: 'Loyalty & Jealousy',
     icon: <Lock className="w-6 h-6" />,
-    iconColor: '#F59E0B' // Orange
+    iconColor: '#F59E0B', // Orange
+    accentVar: '--color-pastel-citrus'
   },
   {
     id: 'boundaries',
     name: 'Boundaries & Privacy',
     icon: <Shield className="w-6 h-6" />,
-    iconColor: '#3B82F6' // Blue
+    iconColor: '#3B82F6', // Blue
+    accentVar: '--color-pastel-sky'
   },
   {
     id: 'money',
     name: 'Money & Power',
     icon: <DollarSign className="w-6 h-6" />,
-    iconColor: '#10B981' // Green
+    iconColor: '#10B981', // Green
+    accentVar: '--color-pastel-mint'
   }
 ];
 
@@ -63,15 +68,16 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
   };
 
   return (
-    <div 
-      className="h-full flex flex-col px-6 md:px-8 lg:px-12 pb-8 relative overflow-hidden"
-      style={{ 
+    <div
+      className="flex flex-col px-6 md:px-8 lg:px-12 py-8 md:py-10 relative"
+      style={{
         color: 'var(--color-text-primary, #4C1D95)',
-        backgroundColor: 'transparent'
+        background: 'linear-gradient(145deg, var(--color-surface-cream), transparent)',
+        minHeight: '100%'
       }}
     >
       {/* Header section with back button and title */}
-      <div className="relative z-20 pt-14 md:pt-16 pb-6">
+      <div className="relative z-20 pt-6 md:pt-8 pb-6">
         {/* Back button */}
         {onBack && (
           <div className="mb-4">
@@ -100,14 +106,15 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10"
         >
-          <h1 
-            style={{ 
-              fontSize: 'var(--font-size-2xl, 1.5rem)',
+          <h1
+            style={{
+              fontSize: 'var(--font-size-3xl, 1.875rem)',
               fontWeight: 'var(--font-weight-bold, 700)',
-              color: 'var(--color-text-primary, #4C1D95)',
+              color: 'var(--color-text-display, #2F2A1F)',
               lineHeight: 'var(--line-height-tight, 1.25)',
-              margin: '0 0 0.75rem 0',
-              padding: 0
+              margin: '0 0 0.5rem 0',
+              padding: 0,
+              fontFamily: 'var(--font-family-display, "Playfair Display", serif)'
             }}
           >
             Categories
@@ -117,7 +124,7 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
               fontSize: 'var(--font-size-base, 1rem)',
               color: 'var(--color-text-secondary, #6B7280)',
               lineHeight: 'var(--line-height-normal, 1.5)',
-              margin: '0 0 2rem 0',
+              margin: '0 0 1.5rem 0',
               padding: 0
             }}
           >
@@ -135,17 +142,17 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
       >
         <div
           style={{
-            backgroundColor: 'var(--color-card-bg)',
-            borderRadius: 'var(--radius-lg)',
-            padding: 'var(--spacing-md)',
-            boxShadow: 'var(--shadow-sm)',
-            border: '1px solid rgba(124, 58, 237, 0.1)'
+            backgroundColor: 'var(--color-surface-ivory)',
+            borderRadius: 'var(--radius-xl)',
+            padding: 'var(--spacing-lg)',
+            boxShadow: 'var(--shadow-md)',
+            border: '1px solid var(--color-border-soft)'
           }}
         >
           <p
             style={{
               fontSize: 'var(--font-size-sm, 0.875rem)',
-              color: 'var(--color-text-primary, #4C1D95)',
+              color: 'var(--color-text-display, #2F2A1F)',
               lineHeight: 'var(--line-height-relaxed, 1.6)',
               margin: '0 0 0.5rem 0',
               padding: 0,
@@ -171,7 +178,7 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 flex-1 overflow-y-auto relative z-10 pb-4">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 relative z-10 mb-6">
         {categories.map((category, index) => (
           <motion.button
             key={category.id}
@@ -184,39 +191,56 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
             }}
             whileTap={{ scale: 0.95 }}
             onClick={() => toggleCategory(category.id)}
-            className="relative aspect-square transition-all duration-300 flex flex-col items-center justify-center gap-3"
+            className="relative transition-all duration-300 flex flex-col items-center text-center"
             style={{
               backgroundColor: 'var(--color-card-bg)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 'var(--spacing-md)',
-              boxShadow: selected.includes(category.id) 
-                ? 'var(--shadow-lg)' 
+              borderRadius: 'var(--radius-xl)',
+              padding: 'var(--spacing-lg)',
+              boxShadow: selected.includes(category.id)
+                ? 'var(--shadow-soft-elevated)'
                 : 'var(--shadow-md)',
               border: selected.includes(category.id)
-                ? '2px solid var(--color-icon-circle-start)'
-                : 'none'
+                ? '1.5px solid var(--color-icon-circle-start)'
+                : '1px solid var(--color-border-soft)',
+              gap: 'var(--spacing-md)'
             }}
+            aria-pressed={selected.includes(category.id)}
           >
-            {/* Icon Circle with Simple Solid Color */}
-            <div 
-              className="flex-shrink-0 rounded-full flex items-center justify-center"
+            {/* Icon + Accent Surface */}
+            <div
               style={{
-                width: '48px',
-                height: '48px',
-                backgroundColor: category.iconColor
+                width: '100%',
+                minHeight: '130px',
+                borderRadius: 'calc(var(--radius-xl) * 0.9)',
+                backgroundColor: `var(${category.accentVar})`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
-              <div style={{ color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div
+                style={{
+                  width: '72px',
+                  height: '72px',
+                  borderRadius: 'var(--radius-full)',
+                  background: `linear-gradient(135deg, ${category.iconColor}, var(--color-card-bg))`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--color-button-text, #FFFFFF)',
+                  boxShadow: 'var(--shadow-orb)'
+                }}
+              >
                 {category.icon}
               </div>
             </div>
-            
+
             {/* Category Name */}
-            <span 
+            <span
               style={{
-                fontSize: 'var(--font-size-sm, 0.875rem)',
+                fontSize: 'var(--font-size-base, 1rem)',
                 fontWeight: 'var(--font-weight-semibold, 600)',
-                color: 'var(--color-text-primary, #4C1D95)',
+                color: 'var(--color-text-display, #2F2A1F)',
                 lineHeight: 'var(--line-height-tight, 1.25)',
                 textAlign: 'center',
                 padding: 0,
@@ -225,6 +249,26 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
             >
               {category.name}
             </span>
+
+            {/* Faux Add Control */}
+            <div
+              style={{
+                width: '100%',
+                borderRadius: 'var(--radius-full)',
+                border: selected.includes(category.id)
+                  ? '1px solid var(--color-icon-circle-start)'
+                  : '1px solid var(--color-border-soft)',
+                padding: '0.65rem',
+                backgroundColor: 'var(--color-surface-ivory)',
+                color: selected.includes(category.id)
+                  ? 'var(--color-icon-circle-start)'
+                  : 'var(--color-text-secondary)',
+                fontSize: 'var(--font-size-sm, 0.875rem)',
+                fontWeight: 'var(--font-weight-medium, 500)'
+              }}
+            >
+              + Add
+            </div>
           </motion.button>
         ))}
       </div>

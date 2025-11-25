@@ -59,11 +59,11 @@ export default function ComparePage() {
   if (loading || !scenario) {
     return (
       <div 
-        className="min-h-screen flex items-start md:items-center justify-center p-4 md:p-6 lg:p-8 safe-area-inset md:py-8"
+        className="min-h-screen flex items-start justify-center p-4 md:px-8 md:py-6 safe-area-inset"
         style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
       >
         <div 
-          className="w-full max-w-md md:max-w-2xl lg:max-w-4xl h-full min-h-screen md:min-h-[600px] md:max-h-[800px] lg:max-h-[900px] rounded-[40px] md:rounded-[32px] overflow-hidden md:overflow-y-auto shadow-2xl relative flex items-center justify-center md:my-8"
+          className="w-full max-w-md md:max-w-5xl lg:max-w-6xl min-h-screen md:min-h-0 rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative flex items-center justify-center"
           style={{ backgroundColor: 'var(--color-card-bg)' }}
         >
           <div style={{ color: 'var(--color-text-primary)' }}>{loading ? 'Loading...' : 'Scenario not found'}</div>
@@ -74,11 +74,11 @@ export default function ComparePage() {
 
   return (
     <div 
-      className="min-h-screen flex items-start md:items-center justify-center p-4 md:p-6 lg:p-8 safe-area-inset md:py-8"
+      className="min-h-screen flex items-start justify-center p-4 md:px-8 md:py-6 safe-area-inset"
       style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
     >
       <div 
-        className="w-full max-w-md md:max-w-2xl lg:max-w-4xl h-full min-h-screen md:min-h-[600px] md:max-h-[800px] lg:max-h-[900px] rounded-[40px] md:rounded-[32px] overflow-hidden md:overflow-y-auto shadow-2xl relative md:my-8"
+        className="w-full max-w-md md:max-w-5xl lg:max-w-6xl min-h-screen md:min-h-0 rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative"
         style={{ backgroundColor: 'var(--color-card-bg)' }}
       >
         <CompareAnswersScreen
