@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { VoiceInput } from './VoiceInput';
 
 interface Scenario {
   id: string;
@@ -151,7 +152,7 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               placeholder="Type your answer here..."
-              className="w-full mb-6 resize-none"
+              className="w-full mb-4 resize-none"
               style={{
                 padding: 'var(--spacing-md)',
                 borderRadius: 'var(--radius-lg)',
@@ -164,6 +165,14 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
                 fontFamily: 'inherit'
               }}
             />
+
+            {/* Voice Input */}
+            <div className="mb-6 flex justify-center">
+              <VoiceInput 
+                onTranscription={(text) => setAnswer(prev => prev ? `${prev} ${text}` : text)}
+                disabled={false}
+              />
+            </div>
 
             {/* Submit Button */}
             <motion.button
