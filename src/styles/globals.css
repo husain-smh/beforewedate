@@ -290,13 +290,18 @@
 
   /* Responsive height adjustments for desktop */
   @media (min-width: 768px) {
+    html {
+      overflow: auto;
+      height: auto;
+      min-height: 100%;
+    }
+
     body {
       overflow: auto;
       position: relative;
-    }
-
-    html {
-      overflow: auto;
+      height: auto;
+      min-height: 100vh;
+      width: 100%;
     }
   }
 }
