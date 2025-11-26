@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Send, Share2, Copy, Check } from 'lucide-react';
+import { ArrowLeft, Share2, Copy, Check } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { VoiceInput } from './VoiceInput';
 
 interface Scenario {
   id: string;
@@ -24,7 +23,6 @@ interface DetailScreenProps {
 }
 
 export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenProps) {
-  const [answer, setAnswer] = useState('');
   const [isSharing, setIsSharing] = useState(false);
   const [shareUrl, setShareUrl] = useState<string>('');
   const [showShareDialog, setShowShareDialog] = useState(false);
@@ -71,11 +69,6 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
     }
   };
 
-  const handleSubmit = () => {
-    if (answer.trim()) {
-      onAnswerSubmit(answer);
-    }
-  };
 
   return (
     <>
@@ -123,7 +116,7 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
 
             {/* Title */}
             <h1 
-              className="mb-6"
+              className="mb-4"
               style={{
                 fontSize: 'var(--font-size-2xl)',
                 fontWeight: 'var(--font-weight-bold)',
@@ -134,54 +127,22 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
               {scenario.title}
             </h1>
 
-            {/* Prompt Box */}
-            <div 
-              className="mb-4"
+            {/* Full Text */}
+            <p 
+              className="mb-6"
               style={{
-                padding: 'var(--spacing-md)',
-                borderRadius: 'var(--radius-lg)',
-                backgroundColor: 'var(--color-input-bg)',
-                border: `1px solid var(--color-input-border)`
+                fontSize: 'var(--font-size-base)',
+                color: 'var(--color-text-body)',
+                lineHeight: 'var(--line-height-relaxed)',
+                paddingLeft: '0.25rem',
+                paddingRight: '0.25rem'
               }}
             >
-              <p style={{
-                fontSize: 'var(--font-size-sm)',
-                color: 'var(--color-text-body)',
-                lineHeight: 'var(--line-height-normal)'
-              }}>
-                Share your honest thoughts. What would you do in this situation and why?
-              </p>
-            </div>
+              {scenario.fullText}
+            </p>
 
-            {/* Input Field */}
-            <textarea
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-              placeholder="Type your answer here..."
-              className="w-full mb-4 resize-none"
-              style={{
-                padding: 'var(--spacing-md)',
-                borderRadius: 'var(--radius-lg)',
-                backgroundColor: 'var(--color-input-bg)',
-                border: `1px solid var(--color-input-border)`,
-                color: 'var(--color-input-text)',
-                fontSize: 'var(--font-size-base)',
-                lineHeight: 'var(--line-height-normal)',
-                minHeight: '120px',
-                fontFamily: 'inherit'
-              }}
-            />
-
-            {/* Voice Input */}
-            <div className="mb-6 flex justify-center">
-              <VoiceInput 
-                onTranscription={(text) => setAnswer(prev => prev ? `${prev} ${text}` : text)}
-                disabled={false}
-              />
-            </div>
-
-            {/* Share + Submit Actions */}
-            <div className="flex flex-col gap-3 mb-4">
+            {/* Share Button - Main Action */}
+            <div className="mb-6">
               <motion.button
                 whileTap={{ scale: 0.97 }}
                 onClick={handleShare}
@@ -190,9 +151,10 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
                 style={{
                   height: '56px',
                   borderRadius: 'var(--radius-full)',
-                  border: `1px solid var(--color-input-border)`,
-                  backgroundColor: 'var(--color-card-bg)',
-                  boxShadow: 'var(--shadow-sm)',
+                  background: isSharing
+                    ? 'linear-gradient(135deg, #E5E7EB, #D1D5DB)'
+                    : 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))',
+                  boxShadow: isSharing ? 'none' : 'var(--shadow-lg)',
                   opacity: isSharing ? 0.6 : 1,
                   cursor: isSharing ? 'not-allowed' : 'pointer',
                   display: 'flex',
@@ -201,67 +163,39 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
                   gap: 'var(--spacing-sm)'
                 }}
               >
-                <Share2 className="w-5 h-5" style={{ color: 'var(--color-text-primary)' }} />
+                <Share2 className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
                 <span style={{
-                  color: 'var(--color-text-primary)',
+                  color: 'var(--color-button-text)',
                   fontSize: 'var(--font-size-base)',
                   fontWeight: 'var(--font-weight-semibold)'
                 }}>
                   {isSharing ? 'Generating link...' : 'Share with your partner'}
                 </span>
               </motion.button>
-
-              <motion.button
-                whileTap={{ scale: 0.97 }}
-                onClick={handleSubmit}
-                disabled={!answer.trim()}
-                className="relative w-full overflow-hidden transition-all duration-300"
-                style={{
-                  height: '56px',
-                  borderRadius: 'var(--radius-full)',
-                  background: answer.trim()
-                    ? 'linear-gradient(135deg, var(--color-button-primary-start), var(--color-button-primary-end))'
-                    : 'linear-gradient(135deg, #E5E7EB, #D1D5DB)',
-                  boxShadow: answer.trim() ? 'var(--shadow-lg)' : 'none',
-                  opacity: answer.trim() ? 1 : 0.5,
-                  cursor: answer.trim() ? 'pointer' : 'not-allowed',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 'var(--spacing-sm)'
-                }}
-              >
-                <span style={{
-                  color: 'var(--color-button-text)',
-                  fontSize: 'var(--font-size-base)',
-                  fontWeight: 'var(--font-weight-semibold)'
-                }}>
-                  Submit
-                </span>
-                <Send className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
-              </motion.button>
             </div>
-
-            {/* Disclaimer */}
-            <p 
-              className="text-center"
-              style={{
-                fontSize: 'var(--font-size-xs)',
-                color: 'var(--color-text-muted)',
-                lineHeight: 'var(--line-height-normal)'
-              }}
-            >
-              Your answer will be saved and can be shared with your partner.
-            </p>
           </motion.div>
         </div>
       </div>
 
       {/* Share Link Dialog */}
       <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
-        <DialogContent className="sm:max-w-md bg-[#15151a] border-white/10">
+        <DialogContent 
+          className="sm:max-w-md"
+          style={{
+            backgroundColor: 'var(--color-card-bg)',
+            border: `1px solid var(--color-input-border)`,
+            borderRadius: 'var(--radius-xl)'
+          }}
+        >
           <DialogHeader>
-            <DialogTitle className="text-white text-center">
+            <DialogTitle 
+              className="text-center"
+              style={{
+                color: 'var(--color-text-primary)',
+                fontSize: 'var(--font-size-lg)',
+                fontWeight: 'var(--font-weight-semibold)'
+              }}
+            >
               Share with your partner
             </DialogTitle>
           </DialogHeader>
@@ -269,8 +203,19 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
           <div className="space-y-4 py-4">
             {/* Share Link */}
             <div className="relative">
-              <div className="bg-[#0B0B0D] border border-white/10 rounded-xl p-4 pr-16">
-                <p className="text-pink-300 text-sm break-all font-mono pr-12">
+              <div 
+                className="rounded-xl p-4 pr-16"
+                style={{
+                  backgroundColor: 'var(--color-input-bg)',
+                  border: `1px solid var(--color-input-border)`
+                }}
+              >
+                <p 
+                  className="text-sm break-all font-mono pr-12"
+                  style={{
+                    color: 'var(--color-text-primary)'
+                  }}
+                >
                   {shareUrl}
                 </p>
               </div>
@@ -279,11 +224,16 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={handleCopy}
-                className={`absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-lg transition-all ${
-                  copied
-                    ? 'bg-green-500/20 text-green-400 border border-green-400/30'
-                    : 'bg-purple-500/20 text-purple-300 border border-purple-400/30 hover:bg-purple-500/30'
-                }`}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-lg transition-all"
+                style={{
+                  backgroundColor: copied 
+                    ? 'rgba(16, 185, 129, 0.1)' 
+                    : 'rgba(168, 85, 247, 0.1)',
+                  border: `1px solid ${copied ? 'rgba(16, 185, 129, 0.3)' : 'rgba(168, 85, 247, 0.3)'}`,
+                  color: copied 
+                    ? '#10B981' 
+                    : 'var(--color-button-primary-start)'
+                }}
               >
                 {copied ? (
                   <Check className="w-4 h-4" />
@@ -294,7 +244,14 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
             </div>
 
             {/* Info text */}
-            <p className="text-xs text-gray-500 text-center">
+            <p 
+              className="text-xs text-center"
+              style={{
+                color: 'var(--color-text-secondary)',
+                fontSize: 'var(--font-size-xs)',
+                lineHeight: 'var(--line-height-normal)'
+              }}
+            >
               Send this link to your partner to see their perspective. You can write yours too.
             </p>
           </div>
