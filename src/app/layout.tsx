@@ -3,8 +3,12 @@ import '../styles/globals.css'
 import '../index.css'
 
 export const metadata: Metadata = {
-  title: 'Know That Person App',
+  title: 'before we date',
   description: 'Explore relationship scenarios and compare answers',
+  icons: {
+    icon: '/bwd pfp.jpeg',
+    apple: '/bwd pfp.jpeg',
+  },
 }
 
 export const viewport: Viewport = {

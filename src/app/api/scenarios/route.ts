@@ -24,18 +24,19 @@ export async function GET(request: NextRequest) {
       }
     }
     
-    const [scenarios, total] = await Promise.all([
-      scenariosCollection
-        .find(query)
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit)
-        .toArray(),
-      scenariosCollection.countDocuments(query)
-    ]);
+    // Only fetch scenarios, skip countDocuments for better performance
+    const scenarios = await scenariosCollection
+      .find(query)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit + 1) // Fetch one extra to check if there are more
+      .toArray();
+    
+    const hasMore = scenarios.length > limit;
+    const results = hasMore ? scenarios.slice(0, limit) : scenarios;
     
     return NextResponse.json({
-      scenarios: scenarios.map(s => ({
+      scenarios: results.map(s => ({
         id: s._id.toString(),
         title: s.title,
         category: s.category,
@@ -46,8 +47,7 @@ export async function GET(request: NextRequest) {
       pagination: {
         page,
         limit,
-        total,
-        hasMore: skip + scenarios.length < total,
+        hasMore,
       }
     });
   } catch (error) {
