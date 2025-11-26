@@ -38,6 +38,19 @@ async function createIndexes() {
     await db.collection('scenarios').createIndex({ deletedAt: 1 });
     await db.collection('scenarios').createIndex({ tags: 1 });
     
+    // Compound index for common query pattern: category + deletedAt + createdAt
+    await db.collection('scenarios').createIndex({ 
+      category: 1, 
+      deletedAt: 1, 
+      createdAt: -1 
+    });
+    
+    // Compound index for queries without category
+    await db.collection('scenarios').createIndex({ 
+      deletedAt: 1, 
+      createdAt: -1 
+    });
+    
     console.log('✅ Indexes created successfully');
   } catch (error) {
     console.error('❌ Error creating indexes:', error);

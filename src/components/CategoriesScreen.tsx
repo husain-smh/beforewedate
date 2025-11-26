@@ -1,43 +1,57 @@
 import { useState, useEffect, type ReactElement } from 'react';
 import { motion } from 'motion/react';
-import { Heart, Lock, Shield, DollarSign, ArrowLeft } from 'lucide-react';
+import { Heart, Target, DollarSign, Star, Home, Users, ArrowLeft } from 'lucide-react';
 
 interface Category {
   id: string;
   name: string;
   icon: ReactElement;
-  iconColor: string;
-  accentVar: string;
+  backgroundColor: string;
+  textColor: string;
 }
 
 const categories: Category[] = [
   {
-    id: 'relationship-dynamics',
-    name: 'Relationship Dynamics',
-    icon: <Heart className="w-6 h-6" />,
-    iconColor: '#EF4444', // Red
-    accentVar: '--color-pastel-blush'
-  },
-  {
     id: 'loyalty',
-    name: 'Loyalty & Jealousy',
-    icon: <Lock className="w-6 h-6" />,
-    iconColor: '#F59E0B', // Orange
-    accentVar: '--color-pastel-citrus'
+    name: 'Loyalty',
+    icon: <Heart className="w-8 h-8" />,
+    backgroundColor: '#FCE7F3', // Light pink
+    textColor: '#EC4899' // Pink
   },
   {
     id: 'boundaries',
-    name: 'Boundaries & Privacy',
-    icon: <Shield className="w-6 h-6" />,
-    iconColor: '#3B82F6', // Blue
-    accentVar: '--color-pastel-sky'
+    name: 'Boundaries',
+    icon: <Target className="w-8 h-8" />,
+    backgroundColor: '#DBEAFE', // Light blue
+    textColor: '#3B82F6' // Blue
   },
   {
     id: 'money',
-    name: 'Money & Power',
-    icon: <DollarSign className="w-6 h-6" />,
-    iconColor: '#10B981', // Green
-    accentVar: '--color-pastel-mint'
+    name: 'Money',
+    icon: <DollarSign className="w-8 h-8" />,
+    backgroundColor: '#D1FAE5', // Light green
+    textColor: '#10B981' // Green
+  },
+  {
+    id: 'intimacy',
+    name: 'Intimacy',
+    icon: <Star className="w-8 h-8" />,
+    backgroundColor: '#E9D5FF', // Light purple
+    textColor: '#A855F7' // Purple
+  },
+  {
+    id: 'family',
+    name: 'Family',
+    icon: <Home className="w-8 h-8" />,
+    backgroundColor: '#FED7AA', // Light orange/peach
+    textColor: '#F97316' // Orange
+  },
+  {
+    id: 'ambition',
+    name: 'Ambition',
+    icon: <Users className="w-8 h-8" />,
+    backgroundColor: '#E9D5FF', // Light lavender
+    textColor: '#A78BFA' // Lavender
   }
 ];
 
@@ -178,7 +192,7 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 relative z-10 mb-6">
+      <div className="grid grid-cols-2 gap-4 md:gap-6 relative z-10 mb-6">
         {categories.map((category, index) => (
           <motion.button
             key={category.id}
@@ -191,48 +205,33 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
             }}
             whileTap={{ scale: 0.95 }}
             onClick={() => toggleCategory(category.id)}
-            className="relative transition-all duration-300 flex flex-col items-center text-center"
+            className="relative transition-all duration-300 flex flex-col items-center justify-center text-center"
             style={{
-              backgroundColor: 'var(--color-card-bg)',
+              backgroundColor: category.backgroundColor,
               borderRadius: 'var(--radius-xl)',
-              padding: 'var(--spacing-lg)',
+              padding: '2rem 1.5rem',
+              minHeight: '140px',
               boxShadow: selected.includes(category.id)
-                ? 'var(--shadow-soft-elevated)'
-                : 'var(--shadow-md)',
+                ? '0 4px 12px rgba(0, 0, 0, 0.15)'
+                : '0 2px 8px rgba(0, 0, 0, 0.1)',
               border: selected.includes(category.id)
-                ? '1.5px solid var(--color-icon-circle-start)'
-                : '1px solid var(--color-border-soft)',
-              gap: 'var(--spacing-md)'
+                ? `2px solid ${category.textColor}`
+                : 'none',
+              gap: '1rem',
+              transform: selected.includes(category.id) ? 'scale(1.02)' : 'scale(1)'
             }}
             aria-pressed={selected.includes(category.id)}
           >
-            {/* Icon + Accent Surface */}
+            {/* Icon */}
             <div
               style={{
-                width: '100%',
-                minHeight: '130px',
-                borderRadius: 'calc(var(--radius-xl) * 0.9)',
-                backgroundColor: `var(${category.accentVar})`,
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                color: category.textColor
               }}
             >
-              <div
-                style={{
-                  width: '72px',
-                  height: '72px',
-                  borderRadius: 'var(--radius-full)',
-                  background: `linear-gradient(135deg, ${category.iconColor}, var(--color-card-bg))`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'var(--color-button-text, #FFFFFF)',
-                  boxShadow: 'var(--shadow-orb)'
-                }}
-              >
-                {category.icon}
-              </div>
+              {category.icon}
             </div>
 
             {/* Category Name */}
@@ -240,7 +239,7 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
               style={{
                 fontSize: 'var(--font-size-base, 1rem)',
                 fontWeight: 'var(--font-weight-semibold, 600)',
-                color: 'var(--color-text-display, #2F2A1F)',
+                color: category.textColor,
                 lineHeight: 'var(--line-height-tight, 1.25)',
                 textAlign: 'center',
                 padding: 0,
@@ -249,26 +248,6 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
             >
               {category.name}
             </span>
-
-            {/* Faux Add Control */}
-            <div
-              style={{
-                width: '100%',
-                borderRadius: 'var(--radius-full)',
-                border: selected.includes(category.id)
-                  ? '1px solid var(--color-icon-circle-start)'
-                  : '1px solid var(--color-border-soft)',
-                padding: '0.65rem',
-                backgroundColor: 'var(--color-surface-ivory)',
-                color: selected.includes(category.id)
-                  ? 'var(--color-icon-circle-start)'
-                  : 'var(--color-text-secondary)',
-                fontSize: 'var(--font-size-sm, 0.875rem)',
-                fontWeight: 'var(--font-weight-medium, 500)'
-              }}
-            >
-              + Add
-            </div>
           </motion.button>
         ))}
       </div>

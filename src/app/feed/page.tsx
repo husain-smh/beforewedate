@@ -32,7 +32,7 @@ function FeedContent() {
       style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
     >
       <div 
-        className="w-full max-w-md md:max-w-5xl lg:max-w-6xl min-h-screen md:min-h-0 rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative"
+        className="w-full max-w-md md:max-w-5xl lg:max-w-6xl h-screen md:h-auto md:min-h-[600px] md:max-h-[90vh] rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col"
         style={{ backgroundColor: 'var(--color-card-bg)' }}
       >
         <FeedScreen 

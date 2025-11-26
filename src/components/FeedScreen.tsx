@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ChevronRight, Home, Grid3x3, User } from 'lucide-react';
+import { ChevronRight, Home, Grid3x3 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 interface Scenario {
@@ -20,6 +20,7 @@ interface FeedScreenProps {
 export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories }: FeedScreenProps) {
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [loading, setLoading] = useState(true);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     async function fetchScenarios() {
@@ -39,6 +40,7 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
         console.error('Error fetching scenarios:', error);
       } finally {
         setLoading(false);
+        setHasLoaded(true);
       }
     }
 
@@ -49,11 +51,14 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
 
   return (
     <div 
-      className="flex flex-col"
-      style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+      className="flex flex-col h-full"
+      style={{ 
+        background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))',
+        minHeight: '100%'
+      }}
     >
       {/* Header with App Name */}
-      <div className="relative px-6 pt-6 md:pt-8 pb-4">
+      <div className="relative px-6 pt-6 md:pt-8 pb-4 flex-shrink-0">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,7 +72,7 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
               lineHeight: 'var(--line-height-tight)'
             }}
           >
-            Know That Person
+            before we date
           </h2>
           <p 
             className="mt-1"
@@ -82,13 +87,16 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
         </motion.div>
       </div>
 
-      {/* Scrollable Feed */}
-      <div className="px-6 py-4 space-y-4">
-        {loading ? (
+      {/* Scrollable Feed - This should grow to fill space */}
+      <div 
+        className="px-6 py-4 space-y-4 flex-1 overflow-y-auto"
+        style={{ minHeight: 0 }}
+      >
+        {loading && !hasLoaded ? (
           <div className="flex items-center justify-center py-20">
             <div style={{ color: 'var(--color-text-secondary)' }}>Loading scenarios...</div>
           </div>
-        ) : displayScenarios.length === 0 ? (
+        ) : !loading && hasLoaded && displayScenarios.length === 0 ? (
           <div className="flex items-center justify-center py-20">
             <div style={{ color: 'var(--color-text-secondary)' }}>No scenarios found</div>
           </div>
@@ -167,9 +175,9 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
         )}
       </div>
 
-      {/* Bottom Navigation */}
+      {/* Bottom Navigation - Fixed at bottom */}
       <div 
-        className="px-6 py-4"
+        className="px-6 py-4 flex-shrink-0"
         style={{
           borderTop: `1px solid var(--color-input-border)`,
           backgroundColor: 'var(--color-card-bg)'
@@ -190,13 +198,6 @@ export function FeedScreen({ categories, onScenarioClick, onNavigateToCategories
           >
             <Grid3x3 className="w-6 h-6 mb-1" />
             <span style={{ fontSize: 'var(--font-size-xs)' }}>Categories</span>
-          </button>
-          <button 
-            className="flex flex-col items-center transition-colors"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            <User className="w-6 h-6 mb-1" />
-            <span style={{ fontSize: 'var(--font-size-xs)' }}>You</span>
           </button>
         </div>
       </div>
