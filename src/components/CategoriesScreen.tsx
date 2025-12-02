@@ -122,75 +122,31 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
         >
           <h1
             style={{
-              fontSize: 'var(--font-size-3xl, 1.875rem)',
-              fontWeight: 'var(--font-weight-bold, 700)',
+              fontSize: 'var(--font-size-xl, 1.25rem)',
+              fontWeight: 'var(--font-weight-semibold, 600)',
               color: 'var(--color-text-display, #2F2A1F)',
               lineHeight: 'var(--line-height-tight, 1.25)',
               margin: '0 0 0.5rem 0',
               padding: 0,
-              fontFamily: 'var(--font-family-display, "Playfair Display", serif)'
+              letterSpacing: '0.01em'
             }}
           >
             Categories
           </h1>
           <p 
             style={{ 
-              fontSize: 'var(--font-size-base, 1rem)',
+              fontSize: 'var(--font-size-sm, 0.9rem)',
               color: 'var(--color-text-secondary, #6B7280)',
-              lineHeight: 'var(--line-height-normal, 1.5)',
+              lineHeight: 'var(--line-height-relaxed, 1.6)',
               margin: '0 0 1.5rem 0',
-              padding: 0
+              padding: 0,
+              fontStyle: 'italic'
             }}
           >
-            Choose a category to explore scenarios
+            "The best way to test your partner? Go through these scenarios together and see what happens." — Mama Taylor
           </p>
         </motion.div>
       </div>
-
-      {/* Funny Quote Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="relative z-10 mb-6"
-      >
-        <div
-          style={{
-            backgroundColor: 'var(--color-surface-ivory)',
-            borderRadius: 'var(--radius-xl)',
-            padding: 'var(--spacing-lg)',
-            boxShadow: 'var(--shadow-md)',
-            border: '1px solid var(--color-border-soft)'
-          }}
-        >
-          <p
-            style={{
-              fontSize: 'var(--font-size-sm, 0.875rem)',
-              color: 'var(--color-text-display, #2F2A1F)',
-              lineHeight: 'var(--line-height-relaxed, 1.6)',
-              margin: '0 0 0.5rem 0',
-              padding: 0,
-              fontStyle: 'italic',
-              textAlign: 'center'
-            }}
-          >
-            "The best way to test your partner? Go through these scenarios together and see what happens."
-          </p>
-          <p
-            style={{
-              fontSize: 'var(--font-size-xs, 0.75rem)',
-              color: 'var(--color-text-secondary, #6B7280)',
-              lineHeight: 'var(--line-height-normal, 1.5)',
-              margin: 0,
-              padding: 0,
-              textAlign: 'center',
-              fontWeight: 'var(--font-weight-medium, 500)'
-            }}
-          >
-            — Mama Taylor
-          </p>
-        </div>
-      </motion.div>
 
       <div className="grid grid-cols-2 gap-4 md:gap-6 relative z-10 mb-6">
         {categories.map((category, index) => (
@@ -227,11 +183,11 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                  justifyContent: 'center',
                 color: category.textColor
-              }}
-            >
-              {category.icon}
+                }}
+              >
+                {category.icon}
             </div>
 
             {/* Category Name */}
