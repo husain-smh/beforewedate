@@ -169,7 +169,7 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
                   fontSize: 'var(--font-size-base)',
                   fontWeight: 'var(--font-weight-semibold)'
                 }}>
-                  {isSharing ? 'Generating link...' : 'Share with your partner'}
+                  {isSharing ? 'Generating link...' : 'Ask someone'}
                 </span>
               </motion.button>
             </div>
@@ -252,7 +252,7 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
                 lineHeight: 'var(--line-height-normal)'
               }}
             >
-              Send this link to your partner to see their perspective. You can write yours too.
+              Share this link to know their perspective. And then write yours.
             </p>
           </div>
 
@@ -267,7 +267,7 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
                 boxShadow: 'var(--shadow-md)'
               }}
             >
-              Open private link
+              Tell your Perspective
             </motion.button>
           )}
         </DialogContent>
