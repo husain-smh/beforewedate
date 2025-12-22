@@ -26,9 +26,9 @@ export async function GET(request: NextRequest) {
     
     // Only fetch scenarios, skip countDocuments for better performance
     const scenarios = await scenariosCollection
-      .find(query)
-      .sort({ createdAt: -1 })
-      .skip(skip)
+        .find(query)
+        .sort({ createdAt: -1 })
+        .skip(skip)
       .limit(limit + 1) // Fetch one extra to check if there are more
       .toArray();
     

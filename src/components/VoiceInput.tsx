@@ -98,13 +98,13 @@ export function VoiceInput({ onTranscription, disabled = false }: VoiceInputProp
   // Click handler that toggles recording
   const handleClick = () => {
     if (disabled || isProcessing) return
-    
+
     if (isRecording) {
       // If currently recording, stop it
       stopRecording()
     } else {
       // If not recording, start it
-      startRecording()
+    startRecording()
     }
   }
 
@@ -203,7 +203,7 @@ export function VoiceInput({ onTranscription, disabled = false }: VoiceInputProp
         {isProcessing ? (
           <Loader2 className="w-7 h-7 animate-spin" />
         ) : (
-          <Mic className="w-7 h-7" />
+        <Mic className="w-7 h-7" />
         )}
       </motion.button>
 
