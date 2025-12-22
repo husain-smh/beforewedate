@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EC4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A855F7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background rounded square -->
+  <rect width="400" height="400" rx="80" fill="url(#mainGradient)"/>
+  
+  <!-- Two overlapping speech bubbles representing conversation before dating -->
+  <g transform="translate(200, 200)">
+    <!-- Left speech bubble (slightly behind) -->
+    <g transform="translate(-40, -10)">
+      <circle cx="0" cy="0" r="70" fill="white" opacity="0.9"/>
+      <path d="M -20 50 L -35 75 L 0 55 Z" fill="white" opacity="0.9"/>
+    </g>
+    
+    <!-- Right speech bubble (in front) -->
+    <g transform="translate(40, 10)">
+      <circle cx="0" cy="0" r="70" fill="white" opacity="0.95"/>
+      <path d="M 20 50 L 35 75 L 0 55 Z" fill="white" opacity="0.95"/>
+    </g>
+  </g>
+  
+  <!-- App name at bottom -->
+  <text x="200" y="340" 
+        font-family="system-ui, -apple-system, sans-serif" 
+        font-size="32" 
+        font-weight="600" 
+        fill="white" 
+        text-anchor="middle">
+    before we date
+  </text>
+</svg>
+
