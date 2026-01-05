@@ -17,7 +17,7 @@ interface QuestionCard {
 const questionCards: QuestionCard[] = [
   {
     id: 'feminist',
-    question: 'Is he really a feminist?',
+    question: 'How feminist is he?',
     description: 'See how he handles gender roles in real situations',
     imageUrl: 'https://images.unsplash.com/photo-1541679368093-5c967ac6de11?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBoYW5kcyUyMGhvbGRpbmd8ZW58MXx8fHwxNzY2MjM4NjEzfDA&ixlib=rb-4.1.0&q=80&w=1080',
     color: '#C55C8D',
@@ -25,15 +25,15 @@ const questionCards: QuestionCard[] = [
   },
   {
     id: 'self-obsessed',
-    question: 'Is he self-obsessed?',
-    description: 'Test if he truly considers your needs',
+    question: 'How self-obsessed is he?',
+    description: 'See if he truly considers your needs',
     imageUrl: 'https://images.unsplash.com/photo-1584385002340-d886f3a0f097?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBkaXN0YW5jZSUyMGFwYXJ0fGVufDF8fHx8MTc2NjIzODYxNnww&ixlib=rb-4.1.0&q=80&w=1080',
     color: '#B97DB6',
     bgColor: '#F5E8F4'
   },
   {
     id: 'boundaries',
-    question: 'Does he respect your boundaries?',
+    question: 'How much does he respect your boundaries?',
     description: 'Discover how he reacts when you say no',
     imageUrl: 'https://images.unsplash.com/photo-1755003842734-382751c01a6f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjB3YWxraW5nJTIwdG9nZXRoZXJ8ZW58MXx8fHwxNzY2MjM4NjE1fDA&ixlib=rb-4.1.0&q=80&w=1080',
     color: '#6B8FB4',
@@ -65,7 +65,7 @@ const questionCards: QuestionCard[] = [
   // },
   {
     id: 'emotional',
-    question: 'Is he emotionally available?',
+    question: 'How emotionally available is he?',
     description: 'Check if he can handle deep conversations',
     imageUrl: 'https://images.unsplash.com/photo-1514846528774-8de9d4a07023?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWxhdGlvbnNoaXAlMjBpbnRpbWFjeSUyMGNvdXBsZXxlbnwxfHx8fDE3NjYyMzg2MTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
     color: '#C55C8D',
@@ -73,7 +73,7 @@ const questionCards: QuestionCard[] = [
   },
   {
     id: 'conflict',
-    question: 'How does he handle conflict?',
+    question: 'How mature is he in conflict?',
     description: 'Understand his communication style when things get tough',
     imageUrl: 'https://images.unsplash.com/photo-1756772796998-22d2c745653b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBzaGFkb3clMjBzaWxob3VldHRlfGVufDF8fHx8MTc2NjIzODYxM3ww&ixlib=rb-4.1.0&q=80&w=1080',
     color: '#6B8FB4',
