@@ -99,7 +99,11 @@ export default function HomePage() {
   }, [])
 
   const handleCardClick = (cardId: string) => {
-    router.push('/coming-soon')
+    if (cardId === 'feminist') {
+      router.push('/test/feminist')
+    } else {
+      router.push('/coming-soon')
+    }
   }
 
   return (

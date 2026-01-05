@@ -29,11 +29,11 @@ function HomeContent() {
 
   return (
     <div 
-      className="min-h-screen flex items-start justify-center p-4 md:px-8 md:py-6 safe-area-inset"
+      className="h-screen flex items-center justify-center px-2 py-2 safe-area-inset overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
     >
       <div 
-        className="w-full max-w-md md:max-w-5xl lg:max-w-6xl min-h-screen md:min-h-0 rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative"
+        className="w-full max-w-md h-full rounded-[40px] overflow-hidden shadow-2xl relative flex flex-col"
         style={{ 
           backgroundColor: 'var(--color-card-bg)',
           color: 'var(--color-text-primary)'
@@ -53,11 +53,11 @@ export default function HomePage() {
   return (
     <Suspense fallback={
       <div 
-        className="min-h-screen flex items-start justify-center p-4 md:px-8 md:py-6 safe-area-inset"
+        className="h-screen flex items-center justify-center px-2 py-2 safe-area-inset overflow-hidden"
         style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
       >
         <div 
-          className="w-full max-w-md md:max-w-5xl lg:max-w-6xl min-h-screen md:min-h-0 rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative flex items-center justify-center"
+          className="w-full max-w-md h-full rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center"
           style={{ backgroundColor: 'var(--color-card-bg)' }}
         >
           <div style={{ color: 'var(--color-text-primary)' }}>Loading...</div>

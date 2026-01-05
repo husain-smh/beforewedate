@@ -83,24 +83,23 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
 
   return (
     <div
-      className="flex flex-col px-6 md:px-8 lg:px-12 py-8 md:py-10 relative"
+      className="flex flex-col h-full relative overflow-hidden"
       style={{
         color: 'var(--color-text-primary, #4C1D95)',
-        background: 'linear-gradient(145deg, var(--color-surface-cream), transparent)',
-        minHeight: '100%'
+        backgroundColor: 'var(--color-card-bg)'
       }}
     >
       {/* Header section with back button and title */}
-      <div className="relative z-20 pt-6 md:pt-8 pb-6">
+      <div className="flex-shrink-0 px-4 pt-4 pb-3 border-b border-gray-100">
         {/* Back button */}
         {onBack && (
-          <div className="mb-4">
+          <div className="mb-2">
             <button 
               onClick={onBack}
               className="flex items-center gap-2 transition-colors"
               style={{ 
                 color: 'var(--color-text-secondary, #6B7280)',
-                fontSize: 'var(--font-size-base, 1rem)',
+                fontSize: 'var(--font-size-sm, 0.875rem)',
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
@@ -108,8 +107,8 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
                 margin: 0
               }}
             >
-              <ArrowLeft className="w-5 h-5" style={{ color: 'var(--color-text-secondary, #6B7280)' }} />
-              <span style={{ color: 'var(--color-text-secondary, #6B7280)' }}>Back to Scenarios</span>
+              <ArrowLeft className="w-4 h-4" style={{ color: 'var(--color-text-secondary, #6B7280)' }} />
+              <span style={{ color: 'var(--color-text-secondary, #6B7280)' }}>Back</span>
             </button>
           </div>
         )}
@@ -122,11 +121,11 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
         >
           <h1
             style={{
-              fontSize: 'var(--font-size-xl, 1.25rem)',
+              fontSize: 'var(--font-size-lg, 1.125rem)',
               fontWeight: 'var(--font-weight-semibold, 600)',
               color: 'var(--color-text-display, #2F2A1F)',
               lineHeight: 'var(--line-height-tight, 1.25)',
-              margin: '0 0 0.5rem 0',
+              margin: '0 0 0.25rem 0',
               padding: 0,
               letterSpacing: '0.01em'
             }}
@@ -135,10 +134,10 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
           </h1>
           <p 
             style={{ 
-              fontSize: 'var(--font-size-sm, 0.9rem)',
+              fontSize: 'var(--font-size-xs, 0.75rem)',
               color: 'var(--color-text-secondary, #6B7280)',
               lineHeight: 'var(--line-height-relaxed, 1.6)',
-              margin: '0 0 1.5rem 0',
+              margin: 0,
               padding: 0,
               fontStyle: 'italic'
             }}
@@ -148,7 +147,8 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 md:gap-6 relative z-10 mb-6">
+      <div className="flex-1 overflow-y-auto px-4 py-3 min-h-0">
+        <div className="grid grid-cols-2 gap-3 relative z-10">
         {categories.map((category, index) => (
           <motion.button
             key={category.id}
@@ -165,15 +165,15 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
             style={{
               backgroundColor: category.backgroundColor,
               borderRadius: 'var(--radius-xl)',
-              padding: '2rem 1.5rem',
-              minHeight: '140px',
+              padding: '1.25rem 1rem',
+              minHeight: '110px',
               boxShadow: selected.includes(category.id)
                 ? '0 4px 12px rgba(0, 0, 0, 0.15)'
                 : '0 2px 8px rgba(0, 0, 0, 0.1)',
               border: selected.includes(category.id)
                 ? `2px solid ${category.textColor}`
                 : 'none',
-              gap: '1rem',
+              gap: '0.75rem',
               transform: selected.includes(category.id) ? 'scale(1.02)' : 'scale(1)'
             }}
             aria-pressed={selected.includes(category.id)}
@@ -183,17 +183,17 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                  justifyContent: 'center',
+                justifyContent: 'center',
                 color: category.textColor
-                }}
-              >
-                {category.icon}
+              }}
+            >
+              {category.icon}
             </div>
 
             {/* Category Name */}
             <span
               style={{
-                fontSize: 'var(--font-size-base, 1rem)',
+                fontSize: 'var(--font-size-sm, 0.875rem)',
                 fontWeight: 'var(--font-weight-semibold, 600)',
                 color: category.textColor,
                 lineHeight: 'var(--line-height-tight, 1.25)',
@@ -206,6 +206,7 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
             </span>
           </motion.button>
         ))}
+        </div>
       </div>
 
       <motion.button
@@ -215,9 +216,9 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
         whileTap={{ scale: 0.97 }}
         disabled={selected.length === 0}
         onClick={handleContinue}
-        className="relative mt-6 w-full overflow-hidden transition-all duration-300 z-10"
+        className="flex-shrink-0 relative mx-4 mb-4 w-auto overflow-hidden transition-all duration-300 z-10"
         style={{
-          height: '56px',
+          height: '48px',
           borderRadius: 'var(--radius-full)',
           background: selected.length === 0
             ? 'linear-gradient(135deg, #E5E7EB, #D1D5DB)'
@@ -232,7 +233,7 @@ export function CategoriesScreen({ onContinue, initialSelected = [], onBack }: C
         <span 
           style={{
             color: 'var(--color-button-text, #FFFFFF)',
-            fontSize: 'var(--font-size-base, 1rem)',
+            fontSize: 'var(--font-size-sm, 0.875rem)',
             fontWeight: 'var(--font-weight-semibold, 600)',
             letterSpacing: '0.025em',
             pointerEvents: 'none',

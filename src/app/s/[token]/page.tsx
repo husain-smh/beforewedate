@@ -79,11 +79,11 @@ export default function SharePage() {
   if (loading) {
     return (
       <div 
-        className="min-h-screen flex items-start justify-center px-2 py-4 md:px-8 md:py-6 safe-area-inset"
+        className="h-screen flex items-center justify-center px-2 py-2 safe-area-inset overflow-hidden"
         style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
       >
         <div 
-          className="w-full max-w-md md:max-w-5xl lg:max-w-6xl min-h-screen md:min-h-0 rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative flex items-center justify-center"
+          className="w-full max-w-md h-full rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center"
           style={{ backgroundColor: 'var(--color-card-bg)' }}
         >
           <div style={{ color: 'var(--color-text-primary)' }}>Loading...</div>
@@ -95,11 +95,11 @@ export default function SharePage() {
   if (!shareData) {
     return (
       <div 
-        className="min-h-screen flex items-start justify-center px-2 py-4 md:px-8 md:py-6 safe-area-inset"
+        className="h-screen flex items-center justify-center px-2 py-2 safe-area-inset overflow-hidden"
         style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
       >
         <div 
-          className="w-full max-w-md md:max-w-5xl lg:max-w-6xl min-h-screen md:min-h-0 rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative flex items-center justify-center"
+          className="w-full max-w-md h-full rounded-[40px] overflow-hidden shadow-2xl relative flex items-center justify-center"
           style={{ backgroundColor: 'var(--color-card-bg)' }}
         >
           <div className="text-center px-3" style={{ color: 'var(--color-text-primary)' }}>
@@ -118,32 +118,27 @@ export default function SharePage() {
 
   return (
     <div 
-      className="min-h-screen flex items-start justify-center px-2 py-4 md:px-8 md:py-6 safe-area-inset"
+      className="h-screen flex items-center justify-center px-2 py-2 safe-area-inset overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
     >
       <div 
-        className="w-full max-w-md md:max-w-5xl lg:max-w-6xl min-h-screen md:min-h-0 rounded-[40px] md:rounded-[32px] overflow-hidden shadow-2xl relative"
+        className="w-full max-w-md h-full rounded-[40px] overflow-hidden shadow-2xl relative flex flex-col"
         style={{ backgroundColor: 'var(--color-card-bg)' }}
       >
-        <div 
-          className="h-full flex flex-col relative overflow-hidden"
-          style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
-        >
-          
-          {/* Header */}
-          <div className="relative px-6 pt-14 pb-4 z-20">
+        {/* Header */}
+        <div className="flex-shrink-0 px-4 pt-4 pb-3 border-b border-gray-100">
             <button 
               onClick={() => router.push('/')}
               className="flex items-center gap-2 transition-colors"
               style={{ color: 'var(--color-text-secondary)' }}
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span style={{ fontSize: 'var(--font-size-base)' }}>Back</span>
+              <ArrowLeft className="w-4 h-4" />
+              <span style={{ fontSize: 'var(--font-size-sm)' }}>Back</span>
             </button>
           </div>
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto px-6 py-4 relative z-10">
+          <div className="flex-1 overflow-y-auto px-4 py-3 relative z-10 min-h-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
