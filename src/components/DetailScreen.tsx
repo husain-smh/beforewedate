@@ -73,23 +73,23 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
   return (
     <>
       <div 
-        className="flex flex-col relative"
-        style={{ background: 'linear-gradient(to bottom, var(--color-bg-gradient-start), var(--color-bg-gradient-mid), var(--color-bg-gradient-end))' }}
+        className="flex flex-col h-full relative"
+        style={{ backgroundColor: 'var(--color-card-bg)' }}
       >
         {/* Header */}
-        <div className="relative px-6 pt-6 md:pt-8 pb-4 z-20">
+        <div className="flex-shrink-0 px-4 pt-4 pb-3 border-b border-gray-100">
           <button 
             onClick={onBack}
             className="flex items-center gap-2 transition-colors"
             style={{ color: 'var(--color-text-secondary)' }}
           >
-            <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: 'var(--font-size-base)' }}>Back to Scenarios</span>
+            <ArrowLeft className="w-4 h-4" />
+            <span style={{ fontSize: 'var(--font-size-sm)' }}>Back</span>
           </button>
         </div>
 
         {/* Scrollable Content */}
-        <div className="px-6 py-4 relative z-10">
+        <div className="flex-1 overflow-y-auto px-4 py-4 relative z-10 min-h-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -97,16 +97,16 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
           >
             {/* Category tag */}
             <div 
-              className="inline-flex items-center mb-4"
+              className="inline-flex items-center mb-3"
               style={{
-                padding: 'var(--spacing-sm) var(--spacing-md)',
+                padding: 'var(--spacing-xs) var(--spacing-sm)',
                 borderRadius: 'var(--radius-md)',
                 backgroundColor: 'var(--color-tag-bg)',
                 border: `1px solid var(--color-tag-border)`
               }}
             >
               <span style={{ 
-                fontSize: 'var(--font-size-sm)',
+                fontSize: 'var(--font-size-xs)',
                 fontWeight: 'var(--font-weight-medium)',
                 color: 'var(--color-tag-text)'
               }}>
@@ -116,9 +116,9 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
 
             {/* Title */}
             <h1 
-              className="mb-4"
+              className="mb-3"
               style={{
-                fontSize: 'var(--font-size-2xl)',
+                fontSize: 'var(--font-size-xl)',
                 fontWeight: 'var(--font-weight-bold)',
                 color: 'var(--color-text-primary)',
                 lineHeight: 'var(--line-height-tight)'
@@ -129,9 +129,9 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
 
             {/* Full Text */}
             <p 
-              className="mb-6"
+              className="mb-4"
               style={{
-                fontSize: 'var(--font-size-base)',
+                fontSize: 'var(--font-size-sm)',
                 color: 'var(--color-text-body)',
                 lineHeight: 'var(--line-height-relaxed)',
                 paddingLeft: '0.25rem',
@@ -142,14 +142,14 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
             </p>
 
             {/* Share Button - Main Action */}
-            <div className="mb-6">
+            <div className="mb-4">
               <motion.button
                 whileTap={{ scale: 0.97 }}
                 onClick={handleShare}
                 disabled={isSharing}
                 className="relative w-full overflow-hidden transition-all duration-300"
                 style={{
-                  height: '56px',
+                  height: '48px',
                   borderRadius: 'var(--radius-full)',
                   background: isSharing
                     ? 'linear-gradient(135deg, #E5E7EB, #D1D5DB)'
@@ -163,10 +163,10 @@ export function DetailScreen({ scenario, onBack, onAnswerSubmit }: DetailScreenP
                   gap: 'var(--spacing-sm)'
                 }}
               >
-                <Share2 className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
+                <Share2 className="w-4 h-4" style={{ color: 'var(--color-button-text)' }} />
                 <span style={{
                   color: 'var(--color-button-text)',
-                  fontSize: 'var(--font-size-base)',
+                  fontSize: 'var(--font-size-sm)',
                   fontWeight: 'var(--font-weight-semibold)'
                 }}>
                   {isSharing ? 'Generating link...' : 'Ask someone'}
