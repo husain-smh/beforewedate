@@ -127,23 +127,23 @@ export default function SharePage() {
       >
         {/* Header */}
         <div className="flex-shrink-0 px-4 pt-4 pb-3 border-b border-gray-100">
-            <button 
-              onClick={() => router.push('/')}
-              className="flex items-center gap-2 transition-colors"
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span style={{ fontSize: 'var(--font-size-sm)' }}>Back</span>
-            </button>
-          </div>
+          <button 
+            onClick={() => router.push('/')}
+            className="flex items-center gap-2 transition-colors"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span style={{ fontSize: 'var(--font-size-sm)' }}>Back</span>
+          </button>
+        </div>
 
-          {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto px-4 py-3 relative z-10 min-h-0">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto px-4 py-3 relative z-10 min-h-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
               {/* Category chip */}
               <div 
                 className="inline-flex items-center mb-4"
@@ -334,8 +334,7 @@ export default function SharePage() {
                   <Send className="w-5 h-5" style={{ color: 'var(--color-button-text)' }} />
                 </motion.button>
               </div>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
