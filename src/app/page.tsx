@@ -24,13 +24,29 @@ const questionCards: QuestionCard[] = [
     bgColor: '#FFE5F0'
   },
   {
-    id: 'self-obsessed',
-    question: 'How self-obsessed is he?',
+    id: 'emotional',
+    question: 'How emotionally available is he?',
+    description: 'Check if he can handle deep conversations',
+    imageUrl: 'https://images.unsplash.com/photo-1514846528774-8de9d4a07023?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWxhdGlvbnNoaXAlMjBpbnRpbWFjeSUyMGNvdXBsZXxlbnwxfHx8fDE3NjYyMzg2MTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    color: '#E8879E',
+    bgColor: '#FFE8ED'
+  },
+  {
+    id: 'team-player',
+    question: 'Is he a team player?',
     description: 'See if he truly considers your needs',
     imageUrl: 'https://images.unsplash.com/photo-1584385002340-d886f3a0f097?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBkaXN0YW5jZSUyMGFwYXJ0fGVufDF8fHx8MTc2NjIzODYxNnww&ixlib=rb-4.1.0&q=80&w=1080',
-    color: '#B97DB6',
-    bgColor: '#F5E8F4'
+    color: '#B08BC7',
+    bgColor: '#F3EDF9'
   },
+  // {
+  //   id: 'self-obsessed',
+  //   question: 'How self-obsessed is he?',
+  //   description: 'See if he truly considers your needs',
+  //   imageUrl: 'https://images.unsplash.com/photo-1584385002340-d886f3a0f097?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBkaXN0YW5jZSUyMGFwYXJ0fGVufDF8fHx8MTc2NjIzODYxNnww&ixlib=rb-4.1.0&q=80&w=1080',
+  //   color: '#B97DB6',
+  //   bgColor: '#F5E8F4'
+  // },
   {
     id: 'boundaries',
     question: 'How much does he respect your boundaries?',
@@ -64,20 +80,12 @@ const questionCards: QuestionCard[] = [
   //   bgColor: '#F0EDFF'
   // },
   {
-    id: 'emotional',
-    question: 'How emotionally available is he?',
-    description: 'Check if he can handle deep conversations',
-    imageUrl: 'https://images.unsplash.com/photo-1514846528774-8de9d4a07023?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWxhdGlvbnNoaXAlMjBpbnRpbWFjeSUyMGNvdXBsZXxlbnwxfHx8fDE3NjYyMzg2MTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    color: '#C55C8D',
-    bgColor: '#FFE5F0'
-  },
-  {
     id: 'conflict',
     question: 'How mature is he in conflict?',
     description: 'Understand his communication style when things get tough',
     imageUrl: 'https://images.unsplash.com/photo-1756772796998-22d2c745653b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBzaGFkb3clMjBzaWxob3VldHRlfGVufDF8fHx8MTc2NjIzODYxM3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    color: '#6B8FB4',
-    bgColor: '#E5F2FF'
+    color: '#7B9EB8',
+    bgColor: '#E8F2F9'
   }
 ]
 
@@ -101,6 +109,10 @@ export default function HomePage() {
   const handleCardClick = (cardId: string) => {
     if (cardId === 'feminist') {
       router.push('/test/feminist')
+    } else if (cardId === 'emotional') {
+      router.push('/test/emotional')
+    } else if (cardId === 'team-player') {
+      router.push('/coming-soon')
     } else {
       router.push('/coming-soon')
     }
